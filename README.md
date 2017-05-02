@@ -34,7 +34,7 @@ If you are not a person that has ever struggled with that type of music theory w
 
 It really does invite to create visual aid upon, right? With clever optical tricks, I think much can be achieved with these kinds of visual aides that react to the real word haptic action. For the user, it is just a matter of sitting down in front of a good camera with a guitar that works with the system (more below). With a bit patience, this can become a potentially powerful tool for music theory neophytes! :)
 
-For augmentation based on what the user actually plays (not just static markings as with the image above), we would probably need more than just the image, we need to know where the strings are pressed down. Sadly, by using only the mono signal from the pickup, we will probably not come very far with that. I will discuss this at a later point in more detail, but there is plenty of successful-enough research on the topic to tap into.
+For augmentation based on what the user actually plays (not just static markings as with the image above), we would probably need more than just the image, we need to know where the strings are pressed down *and* when the strings are struck. Sadly, by using only the mono signal from the pickup, we will probably not come very far with that. I will discuss this at a later point in more detail, but there is plenty of successful-enough research on the topic to tap into.
 
 Here is how I would sketch it as a desktop app:
 
