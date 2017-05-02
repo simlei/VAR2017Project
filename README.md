@@ -30,9 +30,11 @@ Let's see that augmented fretboard again in a more schematic view:
 
 ![enter image description here](rainbow1.png)
 
-If you are not a person that has ever struggled with that type of music theory which really is hard to memorize by heart: Imagine remembering such thing without the visual, colorful aid. Even better, when you have it constantly there, slowly associating the right connection betwen hearing, tactile and visual input. It really does invite to create visual aid upon, right? For the user, it is just a matter of sitting down in front of a good camera with a guitar that works with the system (more below), and letting the computer work it's magic while playing.
+If you are not a person that has ever struggled with that type of music theory which really is hard to memorize by heart: Imagine remembering such thing without the visual, colorful aid. Even worse - without any of the symbols in the picture above.
 
-For augmentation based on what the user actually plays (not just static markings as with the image above), we would probably need more than just the image, we need to know where the strings are pressed down. Sadly, by using only the mono signal from the pickup, we will probably not come very far. I will discuss this at a later point in more detail, but there is plenty of successful-enough research on the topic to tap into.
+It really does invite to create visual aid upon, right? With clever optical tricks, I think much can be achieved with these kinds of visual aides that react to the real word haptic action. For the user, it is just a matter of sitting down in front of a good camera with a guitar that works with the system (more below). With a bit patience, this can become a potentially powerful tool for music theory neophytes! :)
+
+For augmentation based on what the user actually plays (not just static markings as with the image above), we would probably need more than just the image, we need to know where the strings are pressed down. Sadly, by using only the mono signal from the pickup, we will probably not come very far with that. I will discuss this at a later point in more detail, but there is plenty of successful-enough research on the topic to tap into.
 
 Here is how I would sketch it as a desktop app:
 
