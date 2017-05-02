@@ -147,7 +147,7 @@ simon.leischnig@stud.tu-darmstadt.de
 * [H2] Kerdvibulvech, Chutisant, and Hideo Saito. "Model-based hand tracking by chamfer distance and adaptive color learning using particle filter." EURASIP Journal on Image and Video Processing 2009.1 (2009): 724947. https://www.researchgate.net/publication/40892107_Model-Based_Hand_Tracking_by_Chamfer_Distance_and_Adaptive_Color_Learning_Using_Particle_Filter
 * [H3 TUD] Rau, Michael, A Linear-Chain Conditional Random Field Approach to the Guitar Fingering Problem http://www.ke.tu-darmstadt.de/lehre/arbeiten/master/2016/Rau_Michael.pdf
 * [SP1] Ramsay, David, et al. "A Novel Fourier Approach to Guitar String Separation." http://usb.issc.ie/download/file/297.pdf
-* [SP2] Hexaphonic no-preamp pickup $135 http://www.ubertar.com/hexaphonic/products.html
+* [SP2] Hexaphonic no-preamp pickup \$135 http://www.ubertar.com/hexaphonic/products.html
 * [SP3] Fret-Switched guitar with metallic plek |m| http://www.instructables.com/id/OpenChordorg-Build-a-Real-Guitar-Guitar-HeroR/ http://www.laboratoryspokane.com/openchord/the-openchord-v1-guitar/
 * [T2] Liarokapis, Fotis. "Augmented Reality Scenarios for Guitar Learning." TPCG. 2005. https://www.researchgate.net/profile/Fotis_Liarokapis/publication/266340652_Augmented_Reality_Scenarios_for_Guitar_Learning/links/5450f7690cf201441e955423.pdf
 * [T3] Tim Vets, Jonas Degrave, Luc Nijs, Federica Bressan & Marc Leman (2017): PLXTRM: Prediction-Led eXtended-guitar Tool for Real-time Music applications and live performance, Journal of New Music Research
