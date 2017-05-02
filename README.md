@@ -1,7 +1,7 @@
 Virtual and Augmented Reality - Project 2017
 
-**Augmented guitar chord training environment
-using hand tracking and a customized real instrument**
+**Augmented guitar training and experimentation environment
+with hand tracking and a customized electrical guitar setup**
 
 Simon Leischnig
 
@@ -18,7 +18,7 @@ Take for example this "real-life augmentation" of my guitar after spending too m
 
 ![enter image description here](guitar1.png)
 
-It makes use of the fact that there are seven rainbow colors as well as seven steps on a common western musical scale. It also looks just darn flashy. It *would* be nice to have that in a VR app, and to be able to turn off some of these colors, e.g. display only those that belong to a specific chord!
+It makes use of the fact that there are seven rainbow colors as well as seven steps on a common western musical scale. Thus, all positions with a round sticker are notes that fall on the *C Major / A minor* scale. It also looks just darn flashy. It *would* be nice to have that in a VR app, and to be able to turn off some of these colors, e.g. display only those that belong to a specific chord!
 
 Here we arrive at something that I have long mauled over in my head, that music (in the rainbow-color level of abstraction at least) is wonderfully discrete. Of course that does not mean that anyone with a calculator is supposed to be able to make perfect sense of music that he hears or produces. In some aspects it is like a magic cube or chess: most people grasp the basic rules quite okay when first introduced ...
 
@@ -30,7 +30,9 @@ Let's see that augmented fretboard again in a more schematic view:
 
 ![enter image description here](rainbow1.png)
 
-If you are a person that has ever struggled with that type of music theory that is hard to memorize by heart: does this not invite to create visual aid upon? It is just a matter of sitting down in front of a good camera, and figuring out the orientation of the guitar (provided its 3D model). For augmentation based on what the user actually plays, we would probably need more than just the image. Sadly, by using only the mono signal from the pickup, we will probably not come very far. I will discuss this at a later point in more detail, but there is plenty of successful-enough research on the topic to tap into.
+If you are not a person that has ever struggled with that type of music theory which really is hard to memorize by heart: Imagine remembering such thing without the visual, colorful aid. Even better, when you have it constantly there, slowly associating the right connection betwen hearing, tactile and visual input. It really does invite to create visual aid upon, right? For the user, it is just a matter of sitting down in front of a good camera with a guitar that works with the system (more below), and letting the computer work it's magic while playing.
+
+For augmentation based on what the user actually plays (not just static markings as with the image above), we would probably need more than just the image, we need to know where the strings are pressed down. Sadly, by using only the mono signal from the pickup, we will probably not come very far. I will discuss this at a later point in more detail, but there is plenty of successful-enough research on the topic to tap into.
 
 Here is how I would sketch it as a desktop app:
 
@@ -56,7 +58,7 @@ A last thing I want to note is that I expect this project (if realized) to be no
 
 How to actually do this is another topic, but having a framework that *speaks a bit musical scale theory (visually)* and is able to record, annotate, and replay past sessions would be a fantastic place to start from. So, I am willing to really commit to the project, but after all that text I feel a little disclaimer is warranted:
 
-*DISCLAIMER: I am conscious that not everyone is in love with music theory or playing guitar as much as I may appear to be. And I think the above ideas are enough to fill multiple projects if done thoroughly. So we can't have it all and concentrate on a minimal requirement.*
+*DISCLAIMER: I am conscious that not everyone is in love with music theory or playing guitar as much as I may appear to be. And I think the above ideas are enough to fill multiple projects if done thoroughly. So, no, probably we wont implement all this, and yes, I too want to concentrate on a minimal stable proof-of-concept implementation first :)*
 
 What I'm looking for are people who are interested in the idea overall and are willing to put in some quality time on their isolated part of the project until that works as required, so we can split up the work efficiently and won't have much do-overs. As for the scope of the project, see [Scope](#scope-of-the-project) where I outline what I think the projects minimal requirements should be a. k. a. when it's okay to slow down.
 
