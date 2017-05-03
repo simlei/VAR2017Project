@@ -115,27 +115,27 @@ In a minimal sense, the proposed project is a guitar body tracker with live mark
 
 As mentioned, this is the absolute minimal core which hast to work to show anything:
 
-1. guitar body tracking (.. stable) (.. precise)
-2. augmented (.. layers of) markers and annotations "on" the fretboard
+* guitar body tracking (.. stable) (.. precise)
+* augmented (.. layers of) markers and annotations "on" the fretboard
 
 As stated in the opening, we want something interactive, and for that a simple objective would be "play these chords / this melody in time"
 To be able to pick up which strings a player presses we will also need the fretboard-switched guitar at some point. I am really not sure when exactly I will have that built but of course I'll concentrate on having it ready as soon as possible.
 
-3. interactive widgets and augmentation layers that contain "games" or promote "free play" kinds of usage.
-4. Self-built Guitar a la "OpenChord V1" [\[SP3\]](#references), including MIDI readout.
+* interactive widgets and augmentation layers that contain "games" or promote "free play" kinds of usage.
+* Self-built Guitar a la "OpenChord V1" [\[SP3\]](#references), including MIDI readout.
 
 At this point I think we will reach the danger zone w.r.t. remaining time, so we should
 
-5. Work out the major kinks and annoyances, make performant, polish codebase up.
+* Work out the major kinks and annoyances, make performant, polish codebase up.
 
 ## Further work
 
 If there is remaining time or just for future reference, the following would be nice-to-haves:
 
-6. Stereo vision
-7. Hand tracking
-8. Control the game / the computer via guitar patterns
-9. Record sessions
+* Stereo vision
+* Hand tracking
+* Control the game / the computer via guitar patterns
+* Record sessions
 
 As becomes obvious, there is always plenty of opportunity to work in parallel without blocking each other as soon as we have a basic framework to develop against something we can observe. This should be done asap, then I would probably like to focus on the first UI elements and start the guitar mod.
 
