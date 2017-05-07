@@ -1,6 +1,6 @@
 Virtual and Augmented Reality - Project 2017
 
-<iframe width="760px" height="500px" src="https://sway.com/s/LJc2ziR6jpuGUxak/embed" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
+<iframe width="760px" height="500px" src="https://sway.com/s/LJc2ziR6jpuGUxak/embed" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
 
 **Augmented guitar training and experimentation environment
 with hand tracking and a customized electrical guitar setup**
