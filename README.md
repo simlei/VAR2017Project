@@ -1,19 +1,13 @@
 Virtual and Augmented Reality - Project 2017
 
-## Presentation
+# Presentation
 
-Since the big project presentations are tomorrow, here is mine :) https://sway.com/LJc2ziR6jpuGUxak?ref=Link
+Since the big project presentations are tomorrow, [here is mine :)](https://sway.com/LJc2ziR6jpuGUxak?ref=Link)
+
 See you all :)
-
-Edit: wow, github pages works with iframes in markdown. That's nice.
 
 <iframe width="760px" height="500px" src="https://sway.com/s/LJc2ziR6jpuGUxak/embed" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
 
-
-**Augmented guitar training and experimentation environment
-with hand tracking and a customized electrical guitar setup**
-
-Simon Leischnig
 
 # Motivation and Project Idea
 
@@ -107,7 +101,7 @@ Apparently, it is a hard problem for computers, not only for humans, to listen t
 
 After picking up the mono signal (which naturally would sound awful), it is separated into six channels, and can be put together in the intended harmonic way through DSP. In contrast to monophonic pickup systems as built in almost every electric guitar, hexaphonic pickup systems conduct over 6 channels separate waveforms for the different strings. This is a popular approach and in a sense the "gold standard", since from a pure audio signal POV this is the closest one gets. [\[T3\]](#references)  provides i. a. a nice overview of the guitar hardware setups that have been tried by different research groups in the past.
 
-The problem is, hexaphonic systems are costly, and a special recording module is needed also. The approach which I think suits this project best, builds on applying a small charge on the guitar strings through a conductive pick. Since the guitar frets are conductive also, they can be used to act as switches for each of the separate strings, to drive a chipset which translates this into MIDI control signals. This clever approach was described and implemented by [\[T3\]](#references). Long before, in a private enterprise, [Laboratory Spokane](http://laboratoryspokane.com) [\[SP3\]](#references) published a guide in 2010 on how to build your own MIDI Guitar (the "OpenChord V1") and even wrote a MIDI controller and an adapter to play the then-popular game "Street Fighter" with this guitar. He also has a Nunchuck controller integrated in his setup which is a nice touch for further extensibility.
+The problem is, hexaphonic systems are costly, and a special recording module is needed also. The approach which I think suits this project best, builds on applying a small charge on the guitar strings through a conductive pick. Since the guitar frets are conductive also, they can be used to act as switches for each of the separate strings, to drive a chipset which translates this into MIDI control signals. In a private enterprise, [Laboratory Spokane](http://laboratoryspokane.com) [\[SP3\]](#references) published a guide in 2010 on how to build your own MIDI Guitar (the "OpenChord V1") and even wrote a MIDI controller and an adapter to play the then-popular game "Street Fighter" with this guitar. He also has a Nunchuck controller integrated in his setup which is a nice touch for further extensibility.
 
 This is a screenshot of a video featuring the OpenChord V1:
 
