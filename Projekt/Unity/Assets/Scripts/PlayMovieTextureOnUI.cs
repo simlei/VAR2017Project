@@ -15,9 +15,9 @@ public class PlayMovieTextureOnUI : MonoBehaviour {
         WebCamDevice[] devices = WebCamTexture.devices;
         for(int i=0; i < devices.Length; i++) {
             Debug.Log(devices[i].name);
-            if(devices[i].name.Equals("HD Webcam C525"))
+            if(devices[i].name.Equals("Logitech HD Webcam C525"))
             {
-                webcamTexture = new WebCamTexture("HD Webcam C525");
+                webcamTexture = new WebCamTexture("Logitech HD Webcam C525");
             } 
         }
         if (webcamTexture == null) {webcamTexture = new WebCamTexture(devices[0].name);}
