@@ -37,7 +37,7 @@ public:
 private:
     ofVec3f posLowerNeck; // lower (== thicker) string, mostly this one is the uppermost though, geometrically speaking.
     ofVec3f posLowerBridge;
-    ofVec3f posHigherNeck; // higher (== thicker) string, mostly this one is the one at the bottom though, geometrically speaking.
+    ofVec3f posHigherNeck; // higher (== thinner) string, mostly this one is the one at the bottom though, geometrically speaking.
     ofVec3f posHigherBridge;
 
     ofPath fretBoundingBox;
