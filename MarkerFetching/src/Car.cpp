@@ -4,10 +4,10 @@
 //Out of 3D-MLExample
 
 GLfloat lightOnePosition[] = {40.0, 40, 100.0, 0.0};
-GLfloat lightOneColor[] = {0.99, 0.99, 0.99, 1.0};
+GLfloat lightOneColor[] = {0.2, 0.2, 0.2, 1.0};
 
 GLfloat lightTwoPosition[] = {-40.0, 40, 100.0, 0.0};
-GLfloat lightTwoColor[] = {0.99, 0.99, 0.99, 1.0};
+GLfloat lightTwoColor[] = {0.2, 0.2, 0.2, 1.0};
 
 
 Car::Car(){
@@ -45,6 +45,8 @@ void Car::setup(){
     glShadeModel (GL_SMOOTH);
 
     /* initialize lighting */
+
+
     glLightfv (GL_LIGHT0, GL_POSITION, lightOnePosition);
     glLightfv (GL_LIGHT0, GL_DIFFUSE, lightOneColor);
     glEnable (GL_LIGHT0);
@@ -55,6 +57,7 @@ void Car::setup(){
     glColorMaterial (GL_FRONT_AND_BACK, GL_DIFFUSE);
     glEnable (GL_COLOR_MATERIAL);
 
+
     //load the squirrel model - the 3ds and the texture file need to be in the same folder
     squirrelModel.loadModel("arrow.3ds", 20);
 
@@ -63,25 +66,25 @@ void Car::setup(){
     //you can update these rotations later on
     //squirrelModel.setRotation(0, 90, 1, 0, 0);
     //squirrelModel.setRotation(1, 270, 0, 0, 1);
-    squirrelModel.setScale(0.001, 0.001, 0.001);
+    squirrelModel.setScale(0.0001* 5.0, 0.0001* 5.0, 0.0001* 5.0);
     //squirrelModel.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0);
 
 }
 
-void Car::draw(){
+void Car::draw(float xOffset, float zOffset){
 
     //material.begin();
-    geometry.draw();
+    //geometry.draw();
     //material.end();
 
-    ofDrawBox(0.2);
+    //ofDrawBox(0.1);
     //lightR.draw();
     //lightL.draw();
 
-    //ofPushMatrix();
-    //ofRotate();
+    ofPushMatrix();
+    ofTranslate(xOffset, 0.f, zOffset);
     squirrelModel.drawFaces();
-    //ofPopMatrix();
+    ofPopMatrix();
 }
 
 void Car::update(){

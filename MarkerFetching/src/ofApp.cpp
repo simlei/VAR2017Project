@@ -83,11 +83,27 @@ void ofApp::draw(){
 
 	//aruco.draw();
 
+
+    vector<aruco::Marker> markers = aruco.getMarkers();
+
 	if(showMarkers){
 		for(int i=0;i<aruco.getNumMarkers();i++){
 			aruco.begin(i);
             //drawMarker(0.15,ofColor::white);
-            if(true){car.draw();} //i == 0 //Should look for id 404 oor 505
+
+            aruco::Marker currentMarker = markers[i];
+           if((currentMarker.idMarker == 404) || (currentMarker.idMarker == 505)){
+                float offset = 0.1f;
+                car.draw();
+                car.draw(offset,offset);
+                car.draw(-offset, offset);
+                car.draw(offset, -offset);
+                car.draw(-offset, -offset);
+            }
+
+
+            //if(true){car.draw();} //i == 0 //Should look for id 404 oor 505
+
             // Loading the 3d-model messxes with the color
             ofSetColor(255);
 			aruco.end();

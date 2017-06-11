@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.5.1, 2017-06-11T16:11:50. -->
+<!-- Written by QtCreator 4.0.3, 2017-06-11T20:00:32. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -40,6 +40,7 @@
    <value type="bool" key="EditorConfiguration.ScrollWheelZooming">true</value>
    <value type="bool" key="EditorConfiguration.ShowMargin">false</value>
    <value type="int" key="EditorConfiguration.SmartBackspaceBehavior">0</value>
+   <value type="bool" key="EditorConfiguration.SmartSelectionChanging">true</value>
    <value type="bool" key="EditorConfiguration.SpacesForTabs">true</value>
    <value type="int" key="EditorConfiguration.TabKeyBehavior">0</value>
    <value type="int" key="EditorConfiguration.TabSize">8</value>
@@ -94,7 +95,6 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Qbs Clean</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qbs.CleanStep</value>
-      <value type="bool" key="Qbs.CleanAll">false</value>
       <value type="bool" key="Qbs.DryKeepGoing">false</value>
       <value type="bool" key="Qbs.DryRun">false</value>
      </valuemap>
@@ -140,7 +140,6 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Qbs Clean</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qbs.CleanStep</value>
-      <value type="bool" key="Qbs.CleanAll">false</value>
       <value type="bool" key="Qbs.DryKeepGoing">false</value>
       <value type="bool" key="Qbs.DryRun">false</value>
      </valuemap>
@@ -172,6 +171,11 @@
    <value type="int" key="ProjectExplorer.Target.DeployConfigurationCount">1</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.PluginSettings"/>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.0">
+    <value type="bool" key="Analyzer.QmlProfiler.AggregateTraces">false</value>
+    <value type="bool" key="Analyzer.QmlProfiler.FlushEnabled">false</value>
+    <value type="uint" key="Analyzer.QmlProfiler.FlushInterval">0</value>
+    <value type="QString" key="Analyzer.QmlProfiler.LastTraceFile"></value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
     <valuelist type="QVariantList" key="Analyzer.Valgrind.AddedSuppressionFiles"/>
     <value type="bool" key="Analyzer.Valgrind.Callgrind.CollectBusEvents">false</value>
     <value type="bool" key="Analyzer.Valgrind.Callgrind.CollectSystime">false</value>
@@ -213,6 +217,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qbs.RunConfiguration:MarkerFetching.qtc_Desktop_b73b2be2---Qbs.RC.NameSeparator---MarkerFetching</value>
     <value type="QString" key="Qbs.RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qbs.RunConfiguration.WorkingDirectory"></value>
+    <value type="QString" key="Qbs.RunConfiguration.WorkingDirectory.default">/home/tim/Schreibtisch/VAR/of_v0.9.8_linux64_release/apps/myApps/MarkerFetching/bin</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>

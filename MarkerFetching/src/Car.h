@@ -7,7 +7,7 @@ class Car{
 public:
     Car();
     void setup();
-    void draw();
+    void draw(float xOffset = 0.f, float zOffset = 0.f);
     void update();
     /*
     void brake();
@@ -20,7 +20,7 @@ private:
     float vel;
     ofBoxPrimitive geometry;
     ofMaterial material;
-    ofLight lightR, lightL;
+    //ofLight lightR, lightL;
 
     //Out of 3D-MLExample
     ofxAssimpModelLoader squirrelModel;
