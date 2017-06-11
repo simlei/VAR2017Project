@@ -1,7 +1,6 @@
 #include "Car.h"
 
 
-
 //Out of 3D-MLExample
 
 GLfloat lightOnePosition[] = {40.0, 40, 100.0, 0.0};
@@ -64,7 +63,7 @@ void Car::setup(){
     //you can update these rotations later on
     //squirrelModel.setRotation(0, 90, 1, 0, 0);
     //squirrelModel.setRotation(1, 270, 0, 0, 1);
-    squirrelModel.setScale(0.9, 0.9, 0.9);
+    squirrelModel.setScale(0.001, 0.001, 0.001);
     //squirrelModel.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0);
 
 }
@@ -79,7 +78,10 @@ void Car::draw(){
     //lightR.draw();
     //lightL.draw();
 
+    //ofPushMatrix();
+    //ofRotate();
     squirrelModel.drawFaces();
+    //ofPopMatrix();
 }
 
 void Car::update(){

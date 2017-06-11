@@ -86,8 +86,8 @@ void ofApp::draw(){
 	if(showMarkers){
 		for(int i=0;i<aruco.getNumMarkers();i++){
 			aruco.begin(i);
-			drawMarker(0.15,ofColor::white);
-            if(i == 0){car.draw();}
+            //drawMarker(0.15,ofColor::white);
+            if(true){car.draw();} //i == 0 //Should look for id 404 oor 505
             // Loading the 3d-model messxes with the color
             ofSetColor(255);
 			aruco.end();
@@ -98,7 +98,7 @@ void ofApp::draw(){
 	if(showBoard && aruco.getBoardProbability()>0.03){
 		for(int i=0;i<aruco.getNumBoards();i++){
 			aruco.beginBoard(i);
-			drawMarker(.5,ofColor::red);
+            //drawMarker(.5,ofColor::red);
 			aruco.end();
 		}
 	}
