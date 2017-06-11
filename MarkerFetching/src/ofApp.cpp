@@ -2,6 +2,7 @@
 #include "ofxCv.h"
 #include "ofBitmapFont.h"
 
+
 void drawMarker(float size, const ofColor & color){
 	ofDrawAxis(size);
 	ofPushMatrix();
@@ -29,7 +30,8 @@ void ofApp::setup(){
 		video = &player;
 	}else{
         grabber.listDevices();
-		grabber.setDeviceID(1);
+        grabber.setDeviceID(1);
+        //grabber.initGrabber(320,240);
         grabber.initGrabber(640,480);
         //grabber.initGrabber(1920,1080);
 		video = &grabber;
@@ -44,7 +46,13 @@ void ofApp::setup(){
 	showBoard = true;
 	showBoardImage = false;
 
-	ofEnableAlphaBlending();
+    ofEnableAlphaBlending();
+
+    //Out of ofNodeExample
+
+    //light.setup();
+    //light.setPosition(-100, 200,0);
+    car.setup();
 
 }
 
@@ -52,17 +60,20 @@ void ofApp::setup(){
 void ofApp::update(){
 	video->update();
 	if(video->isFrameNew()){
-		aruco.detectBoards(video->getPixels());
-        //
+        aruco.detectBoards(video->getPixels());
         // std::cout << aruco.getNumMarkers() << endl;
+        /*
         if(aruco.getNumMarkers() > 0){
             double position [3];
             double orientation [4];
             aruco.getMarkers()[0].OgreGetPoseParameters(position, orientation);
             std::cout << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
         }
-        //
+        */
 	}
+
+    //Out of ofNodeExample
+    car.update();
 }
 
 //--------------------------------------------------------------
@@ -76,6 +87,9 @@ void ofApp::draw(){
 		for(int i=0;i<aruco.getNumMarkers();i++){
 			aruco.begin(i);
 			drawMarker(0.15,ofColor::white);
+            if(i == 0){car.draw();}
+            // Loading the 3d-model messxes with the color
+            ofSetColor(255);
 			aruco.end();
 		}
 	}
@@ -101,6 +115,18 @@ void ofApp::draw(){
 	ofDrawBitmapString("i toggles board image",20,100);
 	ofDrawBitmapString("s saves board image",20,120);
 	ofDrawBitmapString("0-9 saves marker image",20,140);
+
+    //Out of ofNodeExample
+
+    /*
+    if(aruco.getNumMarkers() > 0){
+        aruco.begin(0);
+            car.draw();
+        aruco.end();
+    }*/
+
+
+
 }
 
 //--------------------------------------------------------------

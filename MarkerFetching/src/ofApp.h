@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxAruco.h"
+#include "Car.h"
 
 class ofApp : public ofBaseApp{
 
@@ -32,4 +33,9 @@ class ofApp : public ofBaseApp{
 		bool showBoardImage;
 		ofImage board;
 		ofImage marker;
+
+        //Out of ofNodeExample
+        //ofLight light;
+        //ofEasyCam cam;
+        Car car;
 };

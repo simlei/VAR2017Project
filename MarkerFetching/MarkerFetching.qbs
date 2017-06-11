@@ -12,6 +12,8 @@ Project{
         name: { return FileInfo.baseName(path) }
 
         files: [
+            'src/Car.cpp',
+            'src/Car.h',
             'src/main.cpp',
             'src/ofApp.cpp',
             'src/ofApp.h',
@@ -22,6 +24,7 @@ Project{
             'ofxCv',
             'ofxGui',
             'ofxOpenCv',
+            'ofxAssimpModelLoader',
         ]
 
         // additional flags for the project. the of module sets some
