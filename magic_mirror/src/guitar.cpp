@@ -31,6 +31,12 @@ Guitar::~Guitar() {
 
 }
 
+
+
+void Guitar::setup(){
+
+}
+
 void Guitar::customDraw() {
     auxDraw();
 }
