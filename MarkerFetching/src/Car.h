@@ -7,7 +7,9 @@ class Car{
 public:
     Car();
     void setup();
-    void draw(float xOffset = 0.f, float zOffset = 0.f);
+    void setBoxColor(ofColor& color);
+    void draw(ofVec3f& offset, int primitive, ofColor& color);
+
     void update();
     /*
     void brake();
@@ -24,4 +26,5 @@ private:
 
     //Out of 3D-MLExample
     ofxAssimpModelLoader squirrelModel;
+    ofBoxPrimitive box;
 };

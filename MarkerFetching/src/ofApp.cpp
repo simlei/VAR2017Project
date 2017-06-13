@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "ofxCv.h"
 #include "ofBitmapFont.h"
+#include "guitarmeasure.h"
 
 
 void drawMarker(float size, const ofColor & color){
@@ -20,6 +21,12 @@ void drawMarker(float size, const ofColor & color){
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
+
+
+
+    ofLog() << "TEst1: " << testMeasure.getStringPos(1, 3);
+
 	ofSetVerticalSync(true);
     useVideo = false;
 	string boardName = "boardConfiguration.yml";
@@ -30,7 +37,7 @@ void ofApp::setup(){
 		video = &player;
 	}else{
         grabber.listDevices();
-        grabber.setDeviceID(1);
+        grabber.setDeviceID(0);
         //grabber.initGrabber(320,240);
         grabber.initGrabber(640,480);
         //grabber.initGrabber(1920,1080);
@@ -53,6 +60,42 @@ void ofApp::setup(){
     //light.setup();
     //light.setPosition(-100, 200,0);
     car.setup();
+    overlay.setup();
+
+    // G Major
+//    overlay.state.set(0, 3, true);
+//    overlay.state.set(1, 5, true);
+//    overlay.state.set(2, 5, true);
+//    overlay.state.set(3, 4, true);
+//    overlay.state.set(4, 3, true);
+//    overlay.state.set(5, 3, true);
+
+    // A Minor
+    overlay.state.set(0, 0, true);
+    overlay.state.set(1, 0, true);
+    overlay.state.set(2, 2, true);
+    overlay.state.set(3, 2, true);
+    overlay.state.set(4, 1, true);
+    overlay.state.set(5, 0, true);
+
+    // White keys all on
+//    for(int i=0; i<6; i++) {
+//        for(int k=0; k<12; k++) {
+//            if(overlay.getColorFor(i, k) != ofColor::black) {
+//                overlay.state.set(i,k,true);
+//            }
+//        }
+//    }
+
+    // all on
+    for(int i=0; i<6; i++) {
+        for(int k=0; k<12; k++) {
+            if(true || overlay.getColorFor(i, k) != ofColor::black) {
+                overlay.state.set(i,k,true);
+            }
+        }
+    }
+
 
 }
 
@@ -89,16 +132,19 @@ void ofApp::draw(){
 	if(showMarkers){
 		for(int i=0;i<aruco.getNumMarkers();i++){
 			aruco.begin(i);
-            //drawMarker(0.15,ofColor::white);
+            drawMarker(0.15,ofColor::white);
 
             aruco::Marker currentMarker = markers[i];
-           if((currentMarker.idMarker == 404) || (currentMarker.idMarker == 505)){
+           if((currentMarker.idMarker == 505)){
+//               car.draw();
+               //overlay.customDraw();
+               /*
                 float offset = 0.1f;
                 car.draw();
                 car.draw(offset,offset);
                 car.draw(-offset, offset);
                 car.draw(offset, -offset);
-                car.draw(-offset, -offset);
+                car.draw(-offset, -offset);*/
             }
 
 
@@ -114,7 +160,7 @@ void ofApp::draw(){
 	if(showBoard && aruco.getBoardProbability()>0.03){
 		for(int i=0;i<aruco.getNumBoards();i++){
 			aruco.beginBoard(i);
-            //drawMarker(.5,ofColor::red);
+            drawMarker(.5,ofColor::red);
 			aruco.end();
 		}
 	}
@@ -140,8 +186,6 @@ void ofApp::draw(){
             car.draw();
         aruco.end();
     }*/
-
-
 
 }
 

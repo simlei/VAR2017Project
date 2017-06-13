@@ -35,6 +35,7 @@ void ofApp::setup(){
 //    camera.setPosition(ofVec3f(0.0, 0.0, 0.0));
 //    camera.lookAt(ofVec3f(0.0, 0.0, -1.0));
 
+    std::cout << "HELLO!";
     camera.setupPerspective(); //TODO: default calibration; must be calibrated in accordance with Aruco
     cameraTestOutputStuff();
 
@@ -77,7 +78,7 @@ void ofApp::draw(){
     ofSetHexColor(0xFF0000);
     ofDrawBitmapString("fps: "+ofToString(ofGetFrameRate(), 2), 10, 15);
 
-    fender.draw();  // because fender is inheriting from Guitar and thus from ofNode,
+    //fender.draw();  // because fender is inheriting from Guitar and thus from ofNode,
                     // we can just position it this way and all attached things move with it
 
 
