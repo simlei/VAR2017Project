@@ -65,4 +65,4 @@ Split workload in two tracks. Frequent meeting and joint problem solving.
    * [Electronics / Backend / Support / Documentation (Simon Leischnig)](doc/electronics.md)
 
 As of this date, we have spent 6-7 weeks trying out frameworks and implementing a
-proof-of-concept optical tracking application and developing a prototype.
+proof-of-concept optical tracking application and designing/planning a prototype for the hardware-augmented guitar part.
