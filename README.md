@@ -6,6 +6,12 @@ The project started off on May 8th. [See the archived project pitch of the proje
 started on June 19th 2017, at a state where the project seemed to slow down a
 little, in an effort to organize things better. GitHub makes it really easy to collaboratively edit it and give it a permanent web address.
 
+# Organization and project parts
+
+Split workload in two tracks. Frequent meeting and joint problem solving.
+   * [Frontend / ARuCo tracking / Teaching GUI and functionality  (Tim Unverzagt)](doc/frontend_tracking.md)
+   * [Electronics / Backend / Support / Documentation (Simon Leischnig)](doc/electronics.md)
+
 ## Project inception - from April 24 to May 8
 
 - Research and project pitch for the initial VAR Project kick-off
