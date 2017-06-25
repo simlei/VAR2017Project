@@ -76,14 +76,14 @@ The next step is to prototype on a breadboard and write the PC client program, t
 
 # Problems that may arise
 
-1) An electric guitar may pick up the electric current being switched on and off in the strings.
-2) We accidentally burn an Arduino by shorting something (due to lack of experience)
-3) guitar strings rub through the insulation
-4) Unforeseen problems with the circuit setup are virtually guaranteed with as little prior knowledge of the basics as ours
+1. An electric guitar may pick up the electric current being switched on and off in the strings.
+2. We accidentally burn an Arduino by shorting something (due to lack of experience)
+3. guitar strings rub through the insulation
+4. Unforeseen problems with the circuit setup are virtually guaranteed with as little prior knowledge of the basics as ours
 
 
 # Possible solutions
 
-1) Use an acoustic guitar (ideally with a piezoelectric pickup for clean recording)
-2) buy a new board or one of the cheaper clones
-3) Improve method of insulation and restring
+1. Use an acoustic guitar (ideally with a piezoelectric pickup for clean recording)
+2. buy a new board or one of the cheaper clones
+3. Improve method of insulation and restring
