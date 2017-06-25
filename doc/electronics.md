@@ -40,7 +40,7 @@ Unfortunately, there is a bit of difficulty here. If we just attach a microchip 
 
 This is a sketch of the proposed switch circuit:
 
-![guitar wiring sketch, first draft, remains to be prototyped](wiring.png)
+![guitar wiring sketch, first draft, remains to be prototyped](wiring.PNG)
 
 D0 to D5 are coupled to digital I/O pins of the microcontroller that are configured as digital output pins (can be connected to 5V or GND). They control, the state of which string is currently being read out. Since we are using a pull-up configuration for the input pins (see scheme in the circuit sketch), GND or "0" means the switch circuit is enabled, and 5V or "1" means the switch is disabled. Since we want to read out the strings one-by-one as discussed, only one of D0 to D5 can be at "0", and all others need to be at "1". The microcontroller then knows, to which string the information belongs that is read from D6 onward.
 
