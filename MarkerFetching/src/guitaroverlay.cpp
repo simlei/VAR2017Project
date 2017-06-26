@@ -1,5 +1,11 @@
 #include "guitaroverlay.h"
 #include "guitar.h"
+#include <cmath>
+
+
+float xCallibration = +0.125f;
+float zCallibration = -0.645f;
+
 
 GuitarOverlay::GuitarOverlay(Guitar& pGuitar):
     guitar(pGuitar)
@@ -70,15 +76,21 @@ void GuitarOverlay::setup(){
 
 void GuitarOverlay::customDraw(){
 
+    float zLength = 1.10f;
+    float xHeight = 0.09f;
     for(int stringIdx = 0; stringIdx<GuitarMeasure::MAX_STRING; stringIdx++) {
         for(int fretIdx = 0; fretIdx<12; fretIdx++) {
             bool doit = state.getStringState(stringIdx, fretIdx);
-
             //guitar.measures.getStringPos(stringIdx, fretIdx);
-            if(doit) {
+            //doit = true;
+            if(doit ) {
                 ofColor color = getColorFor(stringIdx, fretIdx);
-                ofVec3f offset(0.05f * ((float) stringIdx), 0.f, 0.1f * ((float) fretIdx));
-                arrow.draw(offset, 0, color);
+                //ofVec3f offset(0.05f * ((float) stringIdx), 0.f, 0.1f * ((float) fretIdx));
+                ofVec3f offset(
+                            xCallibration+(xHeight*stringIdx/6.f),
+                            0.f,
+                            zCallibration+ zLength*(1-(((float)pow((1-(1/17.817f)), fretIdx) + (float)pow((1-(1/17.817f)), fretIdx+1))/2.f)));
+                arrow.draw(offset, 1, color);
             }
         }
     }

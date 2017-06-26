@@ -10,6 +10,8 @@ public:
     static const int MAX_STRING = 6;
     static const int MAX_FRET = 30;
 
+    std::vector<float> fretRatios;
+
     static void check_access(int stringIdx, int fretIdx) { // centralized checking if fret pos is valid
         if(stringIdx < 0 || stringIdx >= MAX_STRING || fretIdx < 0 || fretIdx >= MAX_FRET) {
             ofLogError("Guitar.cpp") << "string or fret index out of range!";

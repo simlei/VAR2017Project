@@ -12,27 +12,27 @@ Project{
         name: { return FileInfo.baseName(path) }
 
         files: [
-            "src/guitar.cpp",
-            "src/guitar.h",
-            "src/guitarmeasure.cpp",
-            "src/guitarmeasure.h",
-            "src/guitaroverlay.cpp",
-            "src/guitaroverlay.h",
-            "src/guitarstringstate.cpp",
-            "src/guitarstringstate.h",
-            "src/Car.cpp",
-            "src/Car.h",
-            "src/main.cpp",
-            "src/ofApp.cpp",
-            "src/ofApp.h",
+            'src/Car.cpp',
+            'src/Car.h',
+            'src/guitar.cpp',
+            'src/guitar.h',
+            'src/guitarmeasure.cpp',
+            'src/guitarmeasure.h',
+            'src/guitaroverlay.cpp',
+            'src/guitaroverlay.h',
+            'src/guitarstringstate.cpp',
+            'src/guitarstringstate.h',
+            'src/main.cpp',
+            'src/ofApp.cpp',
+            'src/ofApp.h',
         ]
 
         of.addons: [
             'ofxAruco',
-            'ofxCv',
             'ofxGui',
-            'ofxOpenCv',
             'ofxAssimpModelLoader',
+            'ofxOpenCv',
+            'ofxCv',
         ]
 
         // additional flags for the project. the of module sets some

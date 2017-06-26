@@ -1,5 +1,5 @@
 #include "ofApp.h"
-#include "ofxCv.h"
+#include "../../../../addons/ofxCv/src/ofxCv.h"
 #include "ofBitmapFont.h"
 #include "guitarmeasure.h"
 
@@ -63,20 +63,22 @@ void ofApp::setup(){
     overlay.setup();
 
     // G Major
-//    overlay.state.set(0, 3, true);
-//    overlay.state.set(1, 5, true);
-//    overlay.state.set(2, 5, true);
-//    overlay.state.set(3, 4, true);
-//    overlay.state.set(4, 3, true);
-//    overlay.state.set(5, 3, true);
+    overlay.state.set(0, 2, true);
+    overlay.state.set(1, 4, true);
+    overlay.state.set(2, 4, true);
+    overlay.state.set(3, 3, true);
+    overlay.state.set(4, 2, true);
+    overlay.state.set(5, 2, true);
 
     // A Minor
-    overlay.state.set(0, 0, true);
-    overlay.state.set(1, 0, true);
-    overlay.state.set(2, 2, true);
-    overlay.state.set(3, 2, true);
-    overlay.state.set(4, 1, true);
-    overlay.state.set(5, 0, true);
+    //overlay.state.set(0, 0, true);
+    //overlay.state.set(1, 0, true);
+    /*
+    overlay.state.set(2, 1, true);
+    overlay.state.set(3, 1, true);
+    overlay.state.set(4, 0, true);
+    */
+    //overlay.state.set(5, 0, true);
 
     // White keys all on
 //    for(int i=0; i<6; i++) {
@@ -88,6 +90,7 @@ void ofApp::setup(){
 //    }
 
     // all on
+    /*
     for(int i=0; i<6; i++) {
         for(int k=0; k<12; k++) {
             if(true || overlay.getColorFor(i, k) != ofColor::black) {
@@ -95,6 +98,7 @@ void ofApp::setup(){
             }
         }
     }
+    */
 
 
 }
@@ -132,12 +136,12 @@ void ofApp::draw(){
 	if(showMarkers){
 		for(int i=0;i<aruco.getNumMarkers();i++){
 			aruco.begin(i);
-            drawMarker(0.15,ofColor::white);
+            //drawMarker(0.15,ofColor::white);
 
             aruco::Marker currentMarker = markers[i];
-           if((currentMarker.idMarker == 505)){
+           if((currentMarker.idMarker == 404)){
 //               car.draw();
-               //overlay.customDraw();
+               overlay.customDraw();
                /*
                 float offset = 0.1f;
                 car.draw();

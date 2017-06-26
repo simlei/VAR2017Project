@@ -40,12 +40,20 @@ void Car::setBoxColor(ofColor& color) {
 void Car::draw(ofVec3f& offset, int primitive, ofColor& color){
     ofPushMatrix();
 
+    //offset = ofVec3f(offset.x + xCallibration, 0.f, offset.z + zCallibration);
     ofTranslate(offset);
 
     if(primitive == 0) {
         squirrelModel.drawFaces();
     } else if(primitive == 1) {
+        float boxSize = 0.01f;
+        box.set(boxSize, boxSize, boxSize);
+
         setBoxColor(color);
+        /*
+        box.setDepth(boxSize);
+        box.setHeight(boxSize);
+        box.setWidth(boxSize);*/
         box.draw();
     }
 

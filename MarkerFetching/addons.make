@@ -1,5 +1,5 @@
 ofxAruco
-ofxCv
 ofxGui
-ofxOpenCv
 ofxAssimpModelLoader
+ofxCv
+ofxOpenCv
