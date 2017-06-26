@@ -43,17 +43,17 @@ little, in an effort to organize things better.
 - Research into alternatives to Unity/Vuforia brought us to
   [OpenFrameworks](http://openframeworks.cc) (_"... is an open source C++ toolkit for creative coding"_), a C++ based framework giving easy access to community libraries, simplifying OpenGL and external hardware access. Despite being beginner-friendly, the implementor uses  100% written and inspectable code in contrast to Unity/Vuforia.
 - Adaptation of OpenFrameworks for our project
-- Switching platform from Windows 10 to Ubuntu 16.04
+- Switching platform from Windows 10 to Ubuntu 16.04 (LTS)
 - Implementation of first optical ARuCo marker/guitar tracking in an OpenFrameworks project
-- Display of static markers on a sudo guitar fretboard
+- Display of static markers on a pseudo guitar fretboard
 - Acquisition of cheap electrical guitar (Fender Squire Strat model) as basis for the electrically augmented guitar
 
 ## June 12 - June 25
 
 - [Research and prototype design of the electrically augmented guitar, acquisition of materials](electronics.md)
 - Documentation (hic)
-- Principled optical tracking of the guitar position in space implemented
-- Code cleanup
+- Concrete tracking and calibration for an old guitar.
+- Major revamping of the Code to ensure sustainability. (Variables and classes have been heavily renamed - Hardcoded Features have been modulized - Comments have been extended)
 - Organization: Splitting workloads into two tracks for the best part of the remaining time
    * Frontend / ARuCo tracking / Teaching GUI and functionality  (Tim Unverzagt)
    * Electronics / Backend / Support / Documentation (Simon Lesischnig)

@@ -68,12 +68,15 @@ Split workload in two tracks. Frequent meeting and joint problem solving.
 
 ## June 12 - June 25
 
-- [Research and prototype design of the electrically augmented guitar, acquisition of materials](doc/electronics.md)
+- [Research and prototype design of the electrically augmented guitar, acquisition of materials](electronics.md)
 - Documentation (hic)
-- Principled optical tracking of the guitar position in space implemented
-- Code cleanup
+- Concrete tracking and calibration for an old guitar.
+- Major revamping of the Code to ensure sustainability.
+   * Variables and classes have been heavily renamed 
+   * Hardcoded Features have been modulized 
+   * Comments have been extended
 - Organization: Splitting workloads into two tracks for the best part of the remaining time
-   * [Frontend / ARuCo tracking / Teaching GUI and functionality  (Tim Unverzagt)](doc/frontend_tracking.md)
+   * Frontend / ARuCo tracking / Teaching GUI and functionality  (Tim Unverzagt)
    * [Electronics / Backend / Support / Documentation (Simon Leischnig)](doc/electronics.md)
 
 As of this date, we have spent 6-7 weeks trying out frameworks and implementing a
