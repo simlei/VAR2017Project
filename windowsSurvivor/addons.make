@@ -1,3 +1,0 @@
-ofxAruco
-ofxCv
-ofxOpenCv
