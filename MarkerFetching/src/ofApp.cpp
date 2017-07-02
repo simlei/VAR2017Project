@@ -1,7 +1,7 @@
 #include "ofApp.h"
 #include "../../../../addons/ofxCv/src/ofxCv.h"
 #include "ofBitmapFont.h"
-#include "guitarmeasure.h"
+//#include "guitarmeasure.h"
 
 
 void drawMarker(float size, const ofColor & color){
@@ -25,7 +25,7 @@ void ofApp::setup(){
 
 
 
-    ofLog() << "TEst1: " << testMeasure.getStringPos(1, 3);
+    //ofLog() << "TEst1: " << testMeasure.getStringPos(1, 3);
 
 	ofSetVerticalSync(true);
     useVideo = false;
@@ -55,20 +55,18 @@ void ofApp::setup(){
 
     ofEnableAlphaBlending();
 
-    //Out of ofNodeExample
-
-    //light.setup();
-    //light.setPosition(-100, 200,0);
-    car.setup();
+    renderer.setup();
     overlay.setup();
 
     // G Major
+    /*
     overlay.state.set(0, 2, true);
     overlay.state.set(1, 4, true);
     overlay.state.set(2, 4, true);
     overlay.state.set(3, 3, true);
     overlay.state.set(4, 2, true);
     overlay.state.set(5, 2, true);
+    */
 
     // A Minor
     //overlay.state.set(0, 0, true);
@@ -80,6 +78,7 @@ void ofApp::setup(){
     */
     //overlay.state.set(5, 0, true);
 
+
     // White keys all on
 //    for(int i=0; i<6; i++) {
 //        for(int k=0; k<12; k++) {
@@ -89,16 +88,14 @@ void ofApp::setup(){
 //        }
 //    }
 
-    // all on
-    /*
-    for(int i=0; i<6; i++) {
-        for(int k=0; k<12; k++) {
-            if(true || overlay.getColorFor(i, k) != ofColor::black) {
-                overlay.state.set(i,k,true);
-            }
-        }
+
+    // all "C" on
+    for(int i=0; i<overlay.scale.at(0).size(); i++) {
+        overlay.state.set(
+                    overlay.scale.at(0).at(i).at(0),
+                    overlay.scale.at(0).at(i).at(1),
+                    true);
     }
-    */
 
 
 }
@@ -120,7 +117,7 @@ void ofApp::update(){
 	}
 
     //Out of ofNodeExample
-    car.update();
+    renderer.update();
 }
 
 //--------------------------------------------------------------
@@ -140,19 +137,19 @@ void ofApp::draw(){
 
             aruco::Marker currentMarker = markers[i];
            if((currentMarker.idMarker == 404)){
-//               car.draw();
+//               noteRenderer.draw();
                overlay.customDraw();
                /*
                 float offset = 0.1f;
-                car.draw();
-                car.draw(offset,offset);
-                car.draw(-offset, offset);
-                car.draw(offset, -offset);
-                car.draw(-offset, -offset);*/
+                noteRenderer.draw();
+                noteRenderer.draw(offset,offset);
+                noteRenderer.draw(-offset, offset);
+                noteRenderer.draw(offset, -offset);
+                noteRenderer.draw(-offset, -offset);*/
             }
 
 
-            //if(true){car.draw();} //i == 0 //Should look for id 404 oor 505
+            //if(true){noteRenderer.draw();} //i == 0 //Should look for id 404 oor 505
 
             // Loading the 3d-model messxes with the color
             ofSetColor(255);
@@ -187,7 +184,7 @@ void ofApp::draw(){
     /*
     if(aruco.getNumMarkers() > 0){
         aruco.begin(0);
-            car.draw();
+            noteRenderer.draw();
         aruco.end();
     }*/
 

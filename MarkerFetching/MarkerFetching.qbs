@@ -12,19 +12,17 @@ Project{
         name: { return FileInfo.baseName(path) }
 
         files: [
-            'src/Car.cpp',
-            'src/Car.h',
-            'src/guitar.cpp',
-            'src/guitar.h',
-            'src/guitarmeasure.cpp',
-            'src/guitarmeasure.h',
-            'src/guitaroverlay.cpp',
-            'src/guitaroverlay.h',
-            'src/guitarstringstate.cpp',
-            'src/guitarstringstate.h',
-            'src/main.cpp',
-            'src/ofApp.cpp',
-            'src/ofApp.h',
+            "src/guitar.cpp",
+            "src/guitar.h",
+            "src/guitaroverlay.cpp",
+            "src/guitaroverlay.h",
+            "src/guitarstringstate.cpp",
+            "src/guitarstringstate.h",
+            "src/main.cpp",
+            "src/noteRenderer.cpp",
+            "src/noteRenderer.h",
+            "src/ofApp.cpp",
+            "src/ofApp.h",
         ]
 
         of.addons: [

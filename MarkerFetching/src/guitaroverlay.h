@@ -23,9 +23,16 @@ public:
     GuitarStringState state;
     void setGuitar(Guitar &guitar);
     Guitar getGuitar();
+    ofVec3f calculateOffset(int stringIdx, int fretIdx);
+
+
+    //Contains a vector containing the positions of occurrence (on the fretboard) for each halfstep-note
+    //  The String will be written first like so:
+    //  { [string,fret] | [string,fret] | [string,fret] }
+    std::vector<std::vector<std::vector<int>>> scale = std::vector<std::vector<std::vector<int>>>(12);
 
     Guitar guitar;
-    Car arrow;
+    noteRenderer renderer;
     ofBoxPrimitive box;
 private:
 

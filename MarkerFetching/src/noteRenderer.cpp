@@ -1,4 +1,4 @@
-#include "Car.h"
+#include "noteRenderer.h"
 
 
 //Out of 3D-MLExample
@@ -10,10 +10,10 @@ GLfloat lightTwoPosition[] = {-40.0, 40, 100.0, 0.0};
 GLfloat lightTwoColor[] = {0.6, 0.6, 0.6, 1.0};
 
 
-Car::Car(){
+noteRenderer::noteRenderer(){
 }
 
-void Car::setup(){
+void noteRenderer::setup(){
     material.setDiffuseColor(ofFloatColor::green);
     glShadeModel (GL_SMOOTH);
     glLightfv (GL_LIGHT0, GL_POSITION, lightOnePosition);
@@ -31,13 +31,13 @@ void Car::setup(){
     box.set(0.04f);
 }
 
-void Car::setBoxColor(ofColor& color) {
+void noteRenderer::setBoxColor(ofColor& color) {
     for(int i=0; i<6; i++) {
         box.setSideColor(i, color);
     }
 }
 
-void Car::draw(ofVec3f& offset, int primitive, ofColor& color){
+void noteRenderer::draw(ofVec3f& offset, int primitive, ofColor& color){
     ofPushMatrix();
 
     //offset = ofVec3f(offset.x + xCallibration, 0.f, offset.z + zCallibration);
@@ -60,5 +60,5 @@ void Car::draw(ofVec3f& offset, int primitive, ofColor& color){
     ofPopMatrix();
 }
 
-void Car::update(){
+void noteRenderer::update(){
 }

@@ -3,9 +3,9 @@
 #include "ofMain.h"
 #include "ofxAssimpModelLoader.h"
 
-class Car{
+class noteRenderer{
 public:
-    Car();
+    noteRenderer();
     void setup();
     void setBoxColor(ofColor& color);
     void draw(ofVec3f& offset, int primitive, ofColor& color);

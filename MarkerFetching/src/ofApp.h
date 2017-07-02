@@ -2,8 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxAruco.h"
-#include "Car.h"
-#include "guitarmeasure.h"
+#include "noteRenderer.h"
+//#include "guitarmeasure.h"
 #include "guitar.h"
 #include "guitaroverlay.h"
 
@@ -44,13 +44,13 @@ class ofApp : public ofBaseApp{
 
 
 
-        GuitarMeasure testMeasure = GuitarMeasure(posLN, posLB, posHN, posHB);
-        Guitar guitar = Guitar(testMeasure);
+        //GuitarMeasure testMeasure = GuitarMeasure(posLN, posLB, posHN, posHB);
+        Guitar guitar = Guitar(posLN, posLB, posHN, posHB);
         GuitarOverlay overlay = GuitarOverlay(guitar);
 
         //Out of ofNodeExample
         //ofLight light;
         //ofEasyCam cam;
-        Car car;
+        noteRenderer renderer;
 
 };
