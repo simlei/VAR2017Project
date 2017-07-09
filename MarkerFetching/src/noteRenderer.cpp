@@ -48,12 +48,7 @@ void noteRenderer::draw(ofVec3f& offset, int primitive, ofColor& color){
     } else if(primitive == 1) {
         float boxSize = 0.01f;
         box.set(boxSize, boxSize, boxSize);
-
         setBoxColor(color);
-        /*
-        box.setDepth(boxSize);
-        box.setHeight(boxSize);
-        box.setWidth(boxSize);*/
         box.draw();
     }
 

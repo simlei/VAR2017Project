@@ -1,5 +1,5 @@
 #include "guitaroverlay.h"
-#include "guitar.h"
+#include "vector"
 #include <cmath>
 
 
@@ -19,6 +19,9 @@ GuitarOverlay::GuitarOverlay(Guitar& pGuitar):
             scale.at(GuitarOverlay::getHalftoneFor(stringIdx,fretIdx)).push_back(tempVec);
         }
     }
+    lastChord = Chord {0, MAYOR};
+    currentChord = Chord {0, MAYOR};
+    nextChord = Chord {0, MAYOR};
 
 }
 
@@ -80,6 +83,7 @@ void GuitarOverlay::setup(){
     for(int i=0; i<6; i++) {
         box.setSideColor(i, ofColor::blue);
     }
+    launchTime = ofGetElapsedTimef();
 }
 
 void GuitarOverlay::customDraw(){
@@ -118,8 +122,53 @@ ofVec3f GuitarOverlay::calculateOffset(int stringIdx, int fretIdx){
     float zLength = 1.10f; //should be read out of the 4 fretpos //TODO
     float xHeight = 0.09f; //should be read out of the 4 fretpos //TODO
 
-    return ofVec3f(
-                xCallibration+(xHeight*stringIdx/6.f),
-                0.f,
-                zCallibration+ zLength*(1-(((float)pow((1-(1/17.817f)), fretIdx) + (float)pow((1-(1/17.817f)), fretIdx+1))/2.f)));
+    ofVec3f resultVec;
+    if(fretIdx == 0){
+        resultVec = ofVec3f(
+                    xCallibration+(xHeight*stringIdx/6.f),
+                    0.f,
+                    zCallibration-0.015f
+                    );
+    }else{
+        resultVec = ofVec3f(
+                    xCallibration+(xHeight*stringIdx/6.f),
+                    0.f,
+                    zCallibration+ zLength*(1-(((float)pow((1-(1/17.817f)), (fretIdx-1)) + (float)pow((1-(1/17.817f)), (fretIdx)))/2.f))
+                    );
+   }
+    return resultVec;
+}
+
+void GuitarOverlay::setNote(int halfTone){
+    // all "halfTone" on
+    for(int i=0; i<scale.at(halfTone).size(); i++) {
+        state.set(
+                    scale.at(halfTone).at(i).at(0),
+                    scale.at(halfTone).at(i).at(1),
+                    true);
+    }
+}
+
+void GuitarOverlay::setChord(Chord displayedChord){
+    //Tonic
+    setNote(displayedChord.baseTone);
+    if((displayedChord.type == MAYOR) || (displayedChord.type == MAYOR7)){
+        //Major Third
+        setNote((displayedChord.baseTone+4)%12);
+    }else if(displayedChord.type == MINOR){
+        //Minor Third
+        setNote((displayedChord.baseTone+3)%12);
+    }
+    //Fifth
+    setNote((displayedChord.baseTone+7)%12);
+}
+
+
+void GuitarOverlay::resetState(){
+    for(int i=0; i<Guitar::MAX_STRING; i++) {
+        state.stateBoard.at(i) = std::vector<bool>(Guitar::MAX_FRET);
+        for(int fret = 0; fret<Guitar::MAX_FRET; fret++) {
+            state.stateBoard.at(i).at(fret) = false;
+        }
+    }
 }

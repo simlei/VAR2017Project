@@ -58,44 +58,11 @@ void ofApp::setup(){
     renderer.setup();
     overlay.setup();
 
-    // G Major
-    /*
-    overlay.state.set(0, 2, true);
-    overlay.state.set(1, 4, true);
-    overlay.state.set(2, 4, true);
-    overlay.state.set(3, 3, true);
-    overlay.state.set(4, 2, true);
-    overlay.state.set(5, 2, true);
-    */
-
-    // A Minor
-    //overlay.state.set(0, 0, true);
-    //overlay.state.set(1, 0, true);
-    /*
-    overlay.state.set(2, 1, true);
-    overlay.state.set(3, 1, true);
-    overlay.state.set(4, 0, true);
-    */
-    //overlay.state.set(5, 0, true);
 
 
-    // White keys all on
-//    for(int i=0; i<6; i++) {
-//        for(int k=0; k<12; k++) {
-//            if(overlay.getColorFor(i, k) != ofColor::black) {
-//                overlay.state.set(i,k,true);
-//            }
-//        }
-//    }
-
-
-    // all "C" on
-    for(int i=0; i<overlay.scale.at(0).size(); i++) {
-        overlay.state.set(
-                    overlay.scale.at(0).at(i).at(0),
-                    overlay.scale.at(0).at(i).at(1),
-                    true);
-    }
+    overlay.setNote(4);
+    //overlay.setChord(4);
+    //overlay.resetState();
 
 
 }
@@ -116,7 +83,6 @@ void ofApp::update(){
         */
 	}
 
-    //Out of ofNodeExample
     renderer.update();
 }
 
@@ -173,11 +139,13 @@ void ofApp::draw(){
 	}
 	ofDrawBitmapString("markers detected: " + ofToString(aruco.getNumMarkers()),20,20);
 	ofDrawBitmapString("fps " + ofToString(ofGetFrameRate()),20,40);
+    /*
 	ofDrawBitmapString("m toggles markers",20,60);
 	ofDrawBitmapString("b toggles board",20,80);
 	ofDrawBitmapString("i toggles board image",20,100);
 	ofDrawBitmapString("s saves board image",20,120);
 	ofDrawBitmapString("0-9 saves marker image",20,140);
+    */
 
     //Out of ofNodeExample
 

@@ -4,20 +4,20 @@
 
 GuitarStringState::GuitarStringState()
 {
-    for(int i=0; i<6; i++) {
-        state[i] = std::vector<bool>(Guitar::MAX_FRET);
+    for(int i=0; i<Guitar::MAX_STRING; i++) {
+        stateBoard[i] = std::vector<bool>(Guitar::MAX_FRET);
         for(int fret = 0; fret<Guitar::MAX_FRET; fret++) {
-            state[i][fret] = false;
+            stateBoard[i][fret] = false;
         }
     }
 }
 
 bool GuitarStringState::getStringState(int stringIdx, int fretIdx) {
     Guitar::check_access(stringIdx, fretIdx);
-    return state[stringIdx][fretIdx];
+    return stateBoard[stringIdx][fretIdx];
 }
 
 void GuitarStringState::set(int stringIdx, int fretIdx, bool on) {
     Guitar::check_access(stringIdx, fretIdx);
-    state[stringIdx][fretIdx] = on;
+    stateBoard[stringIdx][fretIdx] = on;
 }
