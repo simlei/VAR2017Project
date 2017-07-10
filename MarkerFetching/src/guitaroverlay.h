@@ -28,7 +28,7 @@ public:
     void update();
 
     int getHalftoneFor(int stringIdx, int fretIdx);
-    ofColor getColorFor(int stringIdx, int fretIdx);
+    ofColor getColorFor(int stringIdx, int fretIdx, int baseTone);
     Guitar getGuitar();
     ofVec3f calculateOffset(int stringIdx, int fretIdx);
 

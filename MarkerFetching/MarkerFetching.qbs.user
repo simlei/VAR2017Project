@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.1.0, 2017-07-10T01:28:59. -->
+<!-- Written by QtCreator 4.1.0, 2017-07-10T13:18:43. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -219,7 +219,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qbs.RunConfiguration:MarkerFetching.qtc_Desktop_ec244ab4---Qbs.RC.NameSeparator---MarkerFetching</value>
     <value type="QString" key="Qbs.RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qbs.RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="Qbs.RunConfiguration.WorkingDirectory.default"></value>
+    <value type="QString" key="Qbs.RunConfiguration.WorkingDirectory.default">/home/tim/Desktop/OpenFrameworks/of_v0.9.8_linux64_release/apps/GitApps/MarkerFetching/bin</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>

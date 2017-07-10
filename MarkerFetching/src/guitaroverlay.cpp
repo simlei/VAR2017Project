@@ -49,28 +49,29 @@ int GuitarOverlay::getHalftoneFor(int stringIdx, int fretIdx) {
     return ((stringHalftone + fretIdx) % 12);
 }
 
-ofColor GuitarOverlay::getColorFor(int stringIdx, int fretIdx) {
+ofColor GuitarOverlay::getColorFor(int stringIdx, int fretIdx, int baseTone) {
 
     int halftone = getHalftoneFor(stringIdx, fretIdx);
-    if(halftone == 0) { //C
+    halftone -= baseTone
+;    if(halftone == 0) { //I
         return ofColor::red;
     }
-    if(halftone == 2) { //D
+    if(halftone == 2) { //II
         return ofColor::orange;
     }
-    if(halftone == 4) { //E
+    if(halftone == 4) { //III
         return ofColor::yellow;
     }
-    if(halftone == 5) { //F
+    if(halftone == 5) { //IV
         return ofColor::green;
     }
-    if(halftone == 7) { //G
+    if(halftone == 7) { //V
         return ofColor::blue;
     }
-    if(halftone == 9) { //A
+    if(halftone == 9) { //VI
         return ofColor::purple;
     }
-    if(halftone == 11) { //H
+    if(halftone == 11) { //VII
         return ofColor::beige;
     }
     return ofColor::black;
@@ -95,7 +96,7 @@ void GuitarOverlay::customDraw(){
             bool doit = state.getStringState(stringIdx, fretIdx);
             //doit = true;
             if(doit) {
-                ofColor color = getColorFor(stringIdx, fretIdx);
+                ofColor color = getColorFor(stringIdx, fretIdx, currentChord.baseTone);
                 ofVec3f offset;
                 offset = calculateOffset(stringIdx, fretIdx);
                 renderer.draw(offset, 1, color);
@@ -150,6 +151,8 @@ void GuitarOverlay::setNote(int halfTone){
 }
 
 void GuitarOverlay::setChord(Chord displayedChord){
+    lastChord = currentChord;
+    currentChord = displayedChord;
     //Tonic
     setNote(displayedChord.baseTone);
     if((displayedChord.type == MAYOR) || (displayedChord.type == MAYOR7)){

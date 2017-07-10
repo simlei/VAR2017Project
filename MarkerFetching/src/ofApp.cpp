@@ -60,8 +60,8 @@ void ofApp::setup(){
 
 
 
-    overlay.setNote(4);
-    //overlay.setChord(4);
+    //overlay.setNote(4);
+    overlay.setChord(GuitarOverlay::Chord{4, GuitarOverlay::MAYOR});
     //overlay.resetState();
 
 
