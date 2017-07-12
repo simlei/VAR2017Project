@@ -3,7 +3,7 @@
 #include <cmath>
 
 
-float xCallibration = +0.125f;
+float xCallibration = -0.125f; // needs to be negativ if mirrored
 float zCallibration = -0.645f;
 
 
@@ -90,20 +90,21 @@ void GuitarOverlay::setup(){
 void GuitarOverlay::customDraw(){
 
     float zLength = 1.10f;
-    float xHeight = 0.09f;
+    float xHeight = -0.09f; // needs to be negativ if mirrored
+    ofVec3f offset;
+    ofColor color;
     for(int stringIdx = 0; stringIdx<Guitar::MAX_STRING; stringIdx++) {
         for(int fretIdx = 0; fretIdx<12; fretIdx++) {
             bool doit = state.getStringState(stringIdx, fretIdx);
             //doit = true;
             if(doit) {
-                ofColor color = getColorFor(stringIdx, fretIdx, currentChord.baseTone);
-                ofVec3f offset;
+                color = getColorFor(stringIdx, fretIdx, currentChord.baseTone);
                 offset = calculateOffset(stringIdx, fretIdx);
+                renderer.draw(offset, 1, color);
                 renderer.draw(offset, 1, color);
             }
         }
     }
-
 }
 
 void GuitarOverlay::update(){
@@ -126,13 +127,13 @@ ofVec3f GuitarOverlay::calculateOffset(int stringIdx, int fretIdx){
     ofVec3f resultVec;
     if(fretIdx == 0){
         resultVec = ofVec3f(
-                    xCallibration+(xHeight*stringIdx/6.f),
+                    xCallibration+(-xHeight*stringIdx/6.f),// needs to be negativ if mirrored
                     0.f,
                     zCallibration-0.015f
                     );
     }else{
         resultVec = ofVec3f(
-                    xCallibration+(xHeight*stringIdx/6.f),
+                    xCallibration+(-xHeight*stringIdx/6.f),// needs to be negativ if mirrored
                     0.f,
                     zCallibration+ zLength*(1-(((float)pow((1-(1/17.817f)), (fretIdx-1)) + (float)pow((1-(1/17.817f)), (fretIdx)))/2.f))
                     );
@@ -140,30 +141,33 @@ ofVec3f GuitarOverlay::calculateOffset(int stringIdx, int fretIdx){
     return resultVec;
 }
 
-void GuitarOverlay::setNote(int halfTone){
-    // all "halfTone" on
+void GuitarOverlay::setNote(int halfTone, int startFret, int fretInterval){
+    int stringPos;
+    int fretPos;
     for(int i=0; i<scale.at(halfTone).size(); i++) {
-        state.set(
-                    scale.at(halfTone).at(i).at(0),
-                    scale.at(halfTone).at(i).at(1),
-                    true);
+        stringPos = scale.at(halfTone).at(i).at(0);
+        fretPos = scale.at(halfTone).at(i).at(1);
+        if(fretPos== 0 || (fretPos >= startFret && fretPos < (startFret+fretInterval))){
+            state.set(stringPos,fretPos,true);
+        }
     }
 }
 
-void GuitarOverlay::setChord(Chord displayedChord){
+void GuitarOverlay::setChord(Chord displayedChord, int startFret){
     lastChord = currentChord;
     currentChord = displayedChord;
+    int interval = 5;
     //Tonic
-    setNote(displayedChord.baseTone);
+    setNote(displayedChord.baseTone, startFret, interval);
     if((displayedChord.type == MAYOR) || (displayedChord.type == MAYOR7)){
         //Major Third
-        setNote((displayedChord.baseTone+4)%12);
+        setNote((displayedChord.baseTone+4)%12, startFret, interval);
     }else if(displayedChord.type == MINOR){
         //Minor Third
-        setNote((displayedChord.baseTone+3)%12);
+        setNote((displayedChord.baseTone+3)%12, startFret, interval);
     }
     //Fifth
-    setNote((displayedChord.baseTone+7)%12);
+    setNote((displayedChord.baseTone+7)%12, startFret, interval);
 }
 
 

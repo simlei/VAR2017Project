@@ -9,7 +9,7 @@ void drawMarker(float size, const ofColor & color){
 	ofPushMatrix();
 		// move up from the center by size*.5
 		// to draw a box centered at that point
-		ofTranslate(0,size*0.5,0);
+        ofTranslate(0,size*0.5,0);
 		ofFill();
 		ofSetColor(color,50);
 		ofDrawBox(size);
@@ -38,9 +38,7 @@ void ofApp::setup(){
 	}else{
         grabber.listDevices();
         grabber.setDeviceID(0);
-        //grabber.initGrabber(320,240);
-        grabber.initGrabber(640,480);
-        //grabber.initGrabber(1920,1080);
+        grabber.initGrabber(CAM_WIDTH,CAM_HEIGHT);
 		video = &grabber;
 	}
 
@@ -51,7 +49,7 @@ void ofApp::setup(){
 
 	showMarkers = true;
 	showBoard = true;
-	showBoardImage = false;
+    showBoardImage = false;
 
     ofEnableAlphaBlending();
 
@@ -69,9 +67,16 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	video->update();
+
+    songPlayer.update();
+    video->update();
 	if(video->isFrameNew()){
-        aruco.detectBoards(video->getPixels());
+
+        mirroredPixels = video->getPixels();
+        mirroredPixels.mirror(0,1);
+
+        aruco.detectBoards(mirroredPixels);
+        //aruco.detectBoards(video->getPixels());
         // std::cout << aruco.getNumMarkers() << endl;
         /*
         if(aruco.getNumMarkers() > 0){
@@ -81,15 +86,15 @@ void ofApp::update(){
             std::cout << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
         }
         */
-	}
-
+    }
     renderer.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofSetColor(255);
-	video->draw(0,0);
+    //video->draw(0,0);
+    video->draw(CAM_WIDTH,0,-CAM_WIDTH, CAM_HEIGHT);
 
 	//aruco.draw();
 
@@ -99,10 +104,9 @@ void ofApp::draw(){
 	if(showMarkers){
 		for(int i=0;i<aruco.getNumMarkers();i++){
 			aruco.begin(i);
-            //drawMarker(0.15,ofColor::white);
-
+            drawMarker(0.15,ofColor::white);
             aruco::Marker currentMarker = markers[i];
-           if((currentMarker.idMarker == 404)){
+           if((currentMarker.idMarker == 89)){ //Was marker 404 but mirroring it results in marker 89
 //               noteRenderer.draw();
                overlay.customDraw();
                /*
@@ -135,10 +139,11 @@ void ofApp::draw(){
 
 	ofSetColor(255);
 	if(showBoardImage){
-		board.draw(ofGetWidth()-320,0,320,320*float(board.getHeight())/float(board.getWidth()));
-	}
+        board.draw(ofGetWidth()-320,0,320,320*float(board.getHeight())/float(board.getWidth()));
+    }
 	ofDrawBitmapString("markers detected: " + ofToString(aruco.getNumMarkers()),20,20);
-	ofDrawBitmapString("fps " + ofToString(ofGetFrameRate()),20,40);
+    ofDrawBitmapString("fps " + ofToString(ofGetFrameRate()),20,40);
+    ofDrawBitmapString("RunningTime: " + ofToString(songPlayer.runningTime),20,60);
     /*
 	ofDrawBitmapString("m toggles markers",20,60);
 	ofDrawBitmapString("b toggles board",20,80);

@@ -12,6 +12,8 @@ Project{
         name: { return FileInfo.baseName(path) }
 
         files: [
+            "src/songplayer.cpp",
+            "src/songplayer.h",
             "src/guitar.cpp",
             "src/guitar.h",
             "src/guitaroverlay.cpp",

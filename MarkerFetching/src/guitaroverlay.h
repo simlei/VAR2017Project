@@ -4,7 +4,6 @@
 #include "ofMain.h"
 #include "guitar.h"
 #include "guitarstringstate.h"
-#include "guitar.h"
 
 
 class GuitarOverlay: public ofNode
@@ -33,8 +32,8 @@ public:
     ofVec3f calculateOffset(int stringIdx, int fretIdx);
 
     void setGuitar(Guitar &guitar);
-    void setNote(int halfTone);
-    void setChord(Chord displayedChord);
+    void setNote(int halfTone, int startFret, int fretInterval);
+    void setChord(Chord displayedChord, int startFret=0);
     void resetState();
 
 

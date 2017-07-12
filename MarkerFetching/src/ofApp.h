@@ -6,6 +6,7 @@
 //#include "guitarmeasure.h"
 #include "guitar.h"
 #include "guitaroverlay.h"
+#include "songplayer.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,16 +25,19 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-		ofVideoGrabber grabber;
-		ofVideoPlayer player;
-
+        ofVideoGrabber grabber;
+        const static int CAM_WIDTH = 640; //Developed with 640
+        const static int CAM_HEIGHT = 480; //Developed with 480
+        ofVideoPlayer player;
 		ofBaseVideoDraws * video;
+        ofPixels mirroredPixels;
 
-		ofxAruco aruco;
 		bool useVideo;
 		bool showMarkers;
 		bool showBoard;
 		bool showBoardImage;
+        float runningTime;
+        ofxAruco aruco;
 		ofImage board;
 		ofImage marker;
 
@@ -47,6 +51,7 @@ class ofApp : public ofBaseApp{
         //GuitarMeasure testMeasure = GuitarMeasure(posLN, posLB, posHN, posHB);
         Guitar guitar = Guitar(posLN, posLB, posHN, posHB);
         GuitarOverlay overlay = GuitarOverlay(guitar);
+        SongPlayer songPlayer = SongPlayer(60.f);
 
         //Out of ofNodeExample
         //ofLight light;
