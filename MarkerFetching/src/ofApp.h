@@ -3,10 +3,10 @@
 #include "ofMain.h"
 #include "ofxAruco.h"
 #include "noteRenderer.h"
-//#include "guitarmeasure.h"
 #include "guitar.h"
 #include "guitaroverlay.h"
 #include "songplayer.h"
+#include "ofxDatGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,10 +24,32 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+        //GUI
+        ofxDatGui* menuGui;
+        ofxDatGui* modeGui;
+        bool mFullscreen;
+        uint tIndex;
+        vector<ofxDatGuiTheme*> themes;
+        void refreshWindow();
+        void toggleFullscreen();
+        void onButtonEvent(ofxDatGuiButtonEvent e);
+        void onToggleEvent(ofxDatGuiToggleEvent e);
+        void onSliderEvent(ofxDatGuiSliderEvent e);
+        void onTextInputEvent(ofxDatGuiTextInputEvent e);
+        void on2dPadEvent(ofxDatGui2dPadEvent e);
+        void onDropdownEvent(ofxDatGuiDropdownEvent e);
+        void onColorPickerEvent(ofxDatGuiColorPickerEvent e);
+        void onMatrixEvent(ofxDatGuiMatrixEvent e);
+        //EventSubroutines
+        void makeModeGui(string mode);
+
+        //Constant Fields
+        const static int CAM_WIDTH = 640;   //Developed with 640
+        const static int CAM_HEIGHT = 480;  //Developed with 480
+        const static string PLAY_ALONG;     //Problems arose with the prefix "const"
+        const static string CHORD_WORKSHOP; //Problems arose with the prefix "const"
+
         ofVideoGrabber grabber;
-        const static int CAM_WIDTH = 640; //Developed with 640
-        const static int CAM_HEIGHT = 480; //Developed with 480
         ofVideoPlayer player;
 		ofBaseVideoDraws * video;
         ofPixels mirroredPixels;
@@ -51,11 +73,14 @@ class ofApp : public ofBaseApp{
         //GuitarMeasure testMeasure = GuitarMeasure(posLN, posLB, posHN, posHB);
         Guitar guitar = Guitar(posLN, posLB, posHN, posHB);
         GuitarOverlay overlay = GuitarOverlay(guitar);
-        SongPlayer songPlayer = SongPlayer(60.f);
+        SongPlayer* songPlayer;
 
         //Out of ofNodeExample
         //ofLight light;
         //ofEasyCam cam;
         noteRenderer renderer;
+
+    private:
+
 
 };

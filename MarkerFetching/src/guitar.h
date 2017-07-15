@@ -3,7 +3,6 @@
 
 #include "ofMain.h"
 #include "ofxAssimpModelLoader.h"
-//#include "guitarmeasure.h"
 #include "noteRenderer.h"
 
 /*

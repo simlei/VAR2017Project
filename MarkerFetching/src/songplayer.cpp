@@ -1,16 +1,10 @@
 #include "songplayer.h"
 
-SongPlayer::SongPlayer(float inputBpm)
-{
-    bpm = inputBpm;
-    setup();
-}
-
 void SongPlayer::setup(){
     running = false;
     runningTime = 0.f;
     processedBeats = 0.f;
-    currentChordIndex = 0;
+    currentChordIndex = -1;
 
     //Smoke on the water Intro
     song.push_back(runningChord{GuitarOverlay::Chord{9, GuitarOverlay::MAYOR},10}); // A
@@ -29,6 +23,11 @@ void SongPlayer::setup(){
 
 void SongPlayer::update(){
     if(running){
+        if(currentChordIndex == -1){
+            overlay.setChord(song.at(0).chord);
+        }else{
+
+        }
         runningTime += (float)ofGetLastFrameTime();
     }
 }

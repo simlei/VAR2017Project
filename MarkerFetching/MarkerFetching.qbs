@@ -28,6 +28,7 @@ Project{
         ]
 
         of.addons: [
+            'ofxDatGui',
             'ofxAruco',
             'ofxGui',
             'ofxAssimpModelLoader',

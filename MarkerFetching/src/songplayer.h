@@ -1,13 +1,19 @@
 #ifndef SONGPLAYER_H
 #define SONGPLAYER_H
 
+#include "ofMain.h"
 #include "guitaroverlay.h"
 
 
 class SongPlayer
 {
 public:
-    SongPlayer(float inputBpm);
+    SongPlayer(
+        GuitarOverlay& overlay,
+        const float inputBpm
+    );
+    ~SongPlayer();
+
     void setup();
     void update();
 
@@ -17,7 +23,6 @@ public:
     struct runningChord{
         GuitarOverlay::Chord chord;
         float beats; //Length of the chord
-
     };
 
     std::vector<runningChord> song = std::vector<runningChord>();
@@ -26,6 +31,7 @@ public:
     float bpm;
 
 private:
+    GuitarOverlay overlay;
     bool running;
     int currentChordIndex;
     float processedBeats;
