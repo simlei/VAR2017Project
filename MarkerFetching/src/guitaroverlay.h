@@ -12,7 +12,7 @@ public:
     GuitarOverlay(Guitar& pGuitar);
 
 
-    enum chordType {MAYOR, MINOR, MAYOR7};
+    enum chordType {MAYOR, MINOR, MAYOR7, EMPTY};
 
     struct Chord{
         int baseTone;
@@ -24,13 +24,16 @@ public:
 
     void setup();
     void customDraw();
+    void drawChords(int state);
     void update();
+
 
     int getHalftoneFor(int stringIdx, int fretIdx);
     ofColor getColorFor(int stringIdx, int fretIdx, int baseTone);
     Guitar getGuitar();
     ofVec3f calculateOffset(int stringIdx, int fretIdx);
-
+    string toneToString(int tone);
+    string chordToString(Chord chord);
     void setGuitar(Guitar &guitar);
     void setNote(int halfTone, int startFret, int fretInterval);
     void setChord(Chord displayedChord, int startFret=0);
@@ -43,15 +46,18 @@ public:
     std::vector<std::vector<std::vector<int>>> scale = std::vector<std::vector<std::vector<int>>>(12);
 
     GuitarStringState state;
+    Chord nextChord;
 
 private:
+
+    ofTrueTypeFont mainChordFont;
+    ofTrueTypeFont sideChordFont;
     Guitar guitar;
     noteRenderer renderer;
     ofBoxPrimitive box;
     float launchTime;
     Chord lastChord;
     Chord currentChord;
-    Chord nextChord;
 };
 
 #endif // GUITAROVERLAY_H

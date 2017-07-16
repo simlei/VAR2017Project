@@ -8,33 +8,35 @@
 class SongPlayer
 {
 public:
-    SongPlayer(
-        GuitarOverlay& overlay,
-        const float inputBpm
-    );
+    SongPlayer(GuitarOverlay* inputOverlay, string songName);
     ~SongPlayer();
 
     void setup();
     void update();
 
-    void start();
+    void play();
     void pause();
 
     struct runningChord{
         GuitarOverlay::Chord chord;
         float beats; //Length of the chord
     };
-
+    string songName;
     std::vector<runningChord> song = std::vector<runningChord>();
-
     float runningTime;
     float bpm;
+    GuitarOverlay* overlay;
+
+    //Constant Fields
+    const static string SMOKE_ON_THE_WATER;
+    const static string SONG_2;
+    const static string SONG_3;
+    const static string SONG_4;
 
 private:
-    GuitarOverlay overlay;
     bool running;
     int currentChordIndex;
-    float processedBeats;
+    float beatsPlayed;
 };
 
 #endif // SONGPLAYER_H

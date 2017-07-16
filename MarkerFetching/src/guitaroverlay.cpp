@@ -19,10 +19,9 @@ GuitarOverlay::GuitarOverlay(Guitar& pGuitar):
             scale.at(GuitarOverlay::getHalftoneFor(stringIdx,fretIdx)).push_back(tempVec);
         }
     }
-    lastChord = Chord {0, MAYOR};
-    currentChord = Chord {0, MAYOR};
-    nextChord = Chord {0, MAYOR};
-
+    lastChord = Chord {0, EMPTY};
+    currentChord = Chord {0, EMPTY};
+    nextChord = Chord {0, EMPTY};
 }
 
 int GuitarOverlay::getHalftoneFor(int stringIdx, int fretIdx) {
@@ -51,8 +50,10 @@ int GuitarOverlay::getHalftoneFor(int stringIdx, int fretIdx) {
 
 ofColor GuitarOverlay::getColorFor(int stringIdx, int fretIdx, int baseTone) {
 
+
+    //std::cout << "BaseTone for Colour: " << baseTone << std::endl;
     int halftone = getHalftoneFor(stringIdx, fretIdx);
-    halftone -= baseTone
+    halftone = (halftone + 12 - baseTone) % 12;
 ;    if(halftone == 0) { //I
         return ofColor::red;
     }
@@ -74,17 +75,24 @@ ofColor GuitarOverlay::getColorFor(int stringIdx, int fretIdx, int baseTone) {
     if(halftone == 11) { //VII
         return ofColor::beige;
     }
-    return ofColor::black;
+    //std::cout << "Did return black for: " << halftone << std::endl;
 
+    return ofColor::black;
 }
 
 void GuitarOverlay::setup(){
     renderer.setup();
+    /*
     box.set(0.2f);
     for(int i=0; i<6; i++) {
         box.setSideColor(i, ofColor::blue);
     }
+    */
     launchTime = ofGetElapsedTimef();
+
+
+    mainChordFont.load("ASongForJennifer.tff",30);
+    sideChordFont.load("ASongForJennifer.tff",15);
 }
 
 void GuitarOverlay::customDraw(){
@@ -105,6 +113,23 @@ void GuitarOverlay::customDraw(){
             }
         }
     }
+}
+
+void GuitarOverlay::drawChords(int state){
+    ofSetColor(255,255,255);
+    if(state == 1){
+        mainChordFont.drawString(chordToString(currentChord),(640/2)-(mainChordFont.stringWidth(chordToString(currentChord))/2), 20 + mainChordFont.stringHeight(chordToString(currentChord))); //Should be connected to CAM_WIDTH
+        if(&lastChord != NULL){
+            sideChordFont.drawString(chordToString(lastChord),(640/2)-mainChordFont.getSize()-55, 10 + mainChordFont.getSize()); //Should be connected to CAM_WIDTH
+        }
+        if(&nextChord != NULL){
+            sideChordFont.drawString(chordToString(nextChord),(640/2)+mainChordFont.getSize()+45, 10 + mainChordFont.getSize()); //Should be connected to CAM_WIDTH
+        }
+    }
+    else if(state == 2){
+        mainChordFont.drawString(chordToString(currentChord),(640/2)-(mainChordFont.stringWidth(chordToString(currentChord))/2), 20 + 120 + mainChordFont.stringHeight(chordToString(currentChord))); //Should be connected to CAM_WIDTH
+    }
+
 }
 
 void GuitarOverlay::update(){
@@ -154,20 +179,32 @@ void GuitarOverlay::setNote(int halfTone, int startFret, int fretInterval){
 }
 
 void GuitarOverlay::setChord(Chord displayedChord, int startFret){
-    lastChord = currentChord;
-    currentChord = displayedChord;
-    int interval = 5;
-    //Tonic
-    setNote(displayedChord.baseTone, startFret, interval);
-    if((displayedChord.type == MAYOR) || (displayedChord.type == MAYOR7)){
-        //Major Third
-        setNote((displayedChord.baseTone+4)%12, startFret, interval);
-    }else if(displayedChord.type == MINOR){
-        //Minor Third
-        setNote((displayedChord.baseTone+3)%12, startFret, interval);
+    if(displayedChord.type != chordType::EMPTY){
+        lastChord = currentChord;
+        currentChord = displayedChord;
+        int interval = 5;
+        resetState();
+        //Tonic
+        setNote(displayedChord.baseTone, startFret, interval);
+        //std::cout << "Tonic: " << displayedChord.baseTone << std::endl;
+        if((displayedChord.type == MAYOR) || (displayedChord.type == MAYOR7)){
+            //Major Third
+            setNote((displayedChord.baseTone+4)%12, startFret, interval);
+            //std::cout << "MayorT: " << (displayedChord.baseTone+4)%12 << std::endl;
+        }else if(displayedChord.type == MINOR){
+            //Minor Third
+            setNote((displayedChord.baseTone+3)%12, startFret, interval);
+            //std::cout << "MinorT: " << (displayedChord.baseTone+3)%12 << std::endl;
+        }
+        //Fifth
+        setNote((displayedChord.baseTone+7)%12, startFret, interval);
+        //std::cout << "Fifth: " << (displayedChord.baseTone+7)%12 << std::endl;
+        if(displayedChord.type == MAYOR7){
+            //Seventh
+            setNote((displayedChord.baseTone+10)%12, startFret, interval);
+            //std::cout << "Seventh: " << (displayedChord.baseTone+10)%12 << std::endl;
+        }
     }
-    //Fifth
-    setNote((displayedChord.baseTone+7)%12, startFret, interval);
 }
 
 
@@ -178,4 +215,30 @@ void GuitarOverlay::resetState(){
             state.stateBoard.at(i).at(fret) = false;
         }
     }
+}
+
+
+string GuitarOverlay::toneToString(int tone){
+    string resultString = "";
+    if(tone%12 == 0) resultString = "C";
+    else if(tone%12 == 1) resultString = "C#";
+    else if(tone%12 == 2) resultString = "D";
+    else if(tone%12 == 3) resultString = "D#";
+    else if(tone%12 == 4) resultString = "E";
+    else if(tone%12 == 5) resultString = "F";
+    else if(tone%12 == 6) resultString = "F#";
+    else if(tone%12 == 7) resultString = "G";
+    else if(tone%12 == 8) resultString = "G#";
+    else if(tone%12 == 9) resultString = "A";
+    else if(tone%12 == 10) resultString = "A#";
+    else if(tone%12 == 11) resultString = "B";
+    return resultString;
+}
+
+string GuitarOverlay::chordToString(Chord chord){
+    string resultString = "";
+    resultString.append(toneToString(chord.baseTone));
+    if(chord.type == chordType::MINOR) resultString.append("m");
+    if(chord.type == chordType::MAYOR7) resultString.append("7");
+    return resultString;
 }

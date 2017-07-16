@@ -12,6 +12,8 @@ Project{
         name: { return FileInfo.baseName(path) }
 
         files: [
+            "src/guitarreader.cpp",
+            "src/guitarreader.h",
             "src/songplayer.cpp",
             "src/songplayer.h",
             "src/guitar.cpp",
@@ -28,6 +30,7 @@ Project{
         ]
 
         of.addons: [
+            'ofxSimpleSerial',
             'ofxDatGui',
             'ofxAruco',
             'ofxGui',

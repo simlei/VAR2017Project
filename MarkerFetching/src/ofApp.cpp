@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "../../../../addons/ofxCv/src/ofxCv.h"
 #include "ofBitmapFont.h"
+#include <iostream>
 //#include "guitarmeasure.h"
 
 
@@ -13,7 +14,7 @@ void drawMarker(float size, const ofColor & color){
 		ofFill();
 		ofSetColor(color,50);
 		ofDrawBox(size);
-		ofNoFill();
+        ofNoFill();
 		ofSetColor(color);
 		ofDrawBox(size);
 	ofPopMatrix();
@@ -24,8 +25,6 @@ const string ofApp::PLAY_ALONG = "Play Along";
 const string ofApp::CHORD_WORKSHOP = "Chord Workshop";
 
 void ofApp::setup(){
-
-    //ofLog() << "TEst1: " << testMeasure.getStringPos(1, 3);
 
 	ofSetVerticalSync(true);
     useVideo = false;
@@ -47,8 +46,9 @@ void ofApp::setup(){
 	aruco.getBoardImage(board.getPixels());
 	board.update();
 
-
-    //songPlayer = new SongPlayer(overlay, 60.f);
+    overlay = new GuitarOverlay(guitar);
+    songPlayer = new SongPlayer(overlay, SongPlayer::SMOKE_ON_THE_WATER);
+    songPlayer->overlay = overlay;
 
 	showMarkers = true;
 	showBoard = true;
@@ -57,17 +57,14 @@ void ofApp::setup(){
     ofEnableAlphaBlending();
 
     renderer.setup();
-    overlay.setup();
-    //overlay.setNote(4);
-    overlay.setChord(GuitarOverlay::Chord{4, GuitarOverlay::MAYOR});
-    //overlay.resetState();
-
+    overlay->setup();
 
     //-----GUI-----
     ofxDatGui::setAssetPath("/home/tim/Schreibtisch/VAR/of_v0.9.8_linux64_release/addons/ofxDatGui/");//Dependend on local path
 
     // instantiate and position the gui //
         menuGui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
+        menuGui->setWidth(CAM_WIDTH/4);
 
     // add some components //
         //menuGui->addTextInput("Choose Mode");
@@ -149,74 +146,47 @@ void ofApp::setup(){
                     new ofxDatGuiThemeAutumn(),
                     new ofxDatGuiThemeCandy()};
         tIndex = 0;
-
-    // launch the app //
         mFullscreen = false;
-        //refreshWindow();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-    //songPlayer.update();
+    if(reader) reader->update();
+    songPlayer->update();
     video->update();
 	if(video->isFrameNew()){
-
         mirroredPixels = video->getPixels();
         mirroredPixels.mirror(0,1);
-
         aruco.detectBoards(mirroredPixels);
-        //aruco.detectBoards(video->getPixels());
-        // std::cout << aruco.getNumMarkers() << endl;
-        /*
-        if(aruco.getNumMarkers() > 0){
-            double position [3];
-            double orientation [4];
-            aruco.getMarkers()[0].OgreGetPoseParameters(position, orientation);
-            std::cout << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
-        }
-        */
     }
     renderer.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofSetColor(255);
+    ofSetColor(255);
     //video->draw(0,0);
+    //Draws the webcamfeed flipped on the y axis (mirrored)
     video->draw(CAM_WIDTH,0,-CAM_WIDTH, CAM_HEIGHT);
-
-	//aruco.draw();
-
-
+    //std::cout << "Called with state: " << state << std::endl;
+    overlay->drawChords(state);
+    if(reader)reader->draw();
     vector<aruco::Marker> markers = aruco.getMarkers();
 
 	if(showMarkers){
 		for(int i=0;i<aruco.getNumMarkers();i++){
 			aruco.begin(i);
-            drawMarker(0.15,ofColor::white);
+            //drawMarker(0.15,ofColor::white);
             aruco::Marker currentMarker = markers[i];
            if((currentMarker.idMarker == 89)){ //Was marker 404 but mirroring it results in marker 89
-//               noteRenderer.draw();
-               overlay.customDraw();
-               /*
-                float offset = 0.1f;
-                noteRenderer.draw();
-                noteRenderer.draw(offset,offset);
-                noteRenderer.draw(-offset, offset);
-                noteRenderer.draw(offset, -offset);
-                noteRenderer.draw(-offset, -offset);*/
+               overlay->customDraw();
             }
-
-
-            //if(true){noteRenderer.draw();} //i == 0 //Should look for id 404 oor 505
-
-            // Loading the 3d-model messxes with the color
+            // Loading the 3d-model messes with the color
             ofSetColor(255);
 			aruco.end();
 		}
 	}
-
 
 	if(showBoard && aruco.getBoardProbability()>0.03){
 		for(int i=0;i<aruco.getNumBoards();i++){
@@ -226,53 +196,15 @@ void ofApp::draw(){
 		}
 	}
 
-
-	ofSetColor(255);
 	if(showBoardImage){
         board.draw(ofGetWidth()-320,0,320,320*float(board.getHeight())/float(board.getWidth()));
     }
-    /*
-	ofDrawBitmapString("markers detected: " + ofToString(aruco.getNumMarkers()),20,20);
-    ofDrawBitmapString("fps " + ofToString(ofGetFrameRate()),20,40);
-	ofDrawBitmapString("m toggles markers",20,60);
-	ofDrawBitmapString("b toggles board",20,80);
-	ofDrawBitmapString("i toggles board image",20,100);
-	ofDrawBitmapString("s saves board image",20,120);
-	ofDrawBitmapString("0-9 saves marker image",20,140);
-    */
-
-    //Out of ofNodeExample
-
-    /*
-    if(aruco.getNumMarkers() > 0){
-        aruco.begin(0);
-            noteRenderer.draw();
-        aruco.end();
-    }*/
-
+    //ofDrawBitmapString("Song Time: " + ofToString(songPlayer->runningTime),20,100);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if(key=='m') showMarkers = !showMarkers;
-	if(key=='b') showBoard = !showBoard;
-	if(key=='i') showBoardImage = !showBoardImage;
-	if(key=='s') board.save("boardimage.png");
-	if(key>='0' && key<='9'){
-		// there's 1024 different markers
-		int markerID = key - '0';
-		aruco.getMarkerImage(markerID,240,marker);
-		marker.save("marker"+ofToString(markerID)+".png");
-	}
 
-    /*
-    if (key == 'f') {
-        toggleFullscreen();
-    }   else if (key == 32){
-        tIndex = tIndex < themes.size()-1 ? tIndex+1 : 0;
-        menuGui->setTheme(themes[tIndex]);
-    }
-    */
 }
 
 //--------------------------------------------------------------
@@ -350,12 +282,34 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
 
     //-----Switch into "Play Along"-----
     if(e.target->getSelected()->is(PLAY_ALONG)){
+        state = 1;
         this->makeModeGui(PLAY_ALONG);
+        if(reader) {delete reader; reader = NULL; overlay->resetState();}
+        if(songPlayer){
+            songPlayer->play();
+            int dropdownIndex = 0;
+            if(songPlayer->songName == SongPlayer::SMOKE_ON_THE_WATER) dropdownIndex = 0;
+            if(songPlayer->songName == SongPlayer::SONG_2) dropdownIndex = 1;
+            if(songPlayer->songName == SongPlayer::SONG_3) dropdownIndex = 2;
+            if(songPlayer->songName == SongPlayer::SONG_4) dropdownIndex = 3;
+            modeGui->getDropdown("Select Song")->select(dropdownIndex);
+        }
     }
+
+        //Choices in the "PA"-Mode
+        if(e.target->getSelected()->is(SongPlayer::SMOKE_ON_THE_WATER)){
+            if(songPlayer) {delete songPlayer; songPlayer = NULL; overlay->resetState();}
+            songPlayer = new SongPlayer(overlay, SongPlayer::SMOKE_ON_THE_WATER);
+            songPlayer->play();
+        }
 
     //-----Switch into "Chord Workshop"-----
     if(e.target->getSelected()->is(CHORD_WORKSHOP)){
+        state = 2;
         this->makeModeGui(CHORD_WORKSHOP);
+        songPlayer->pause();
+        overlay->resetState();
+        if(!reader) reader = new GuitarReader(overlay);
     }
 }
 
@@ -371,22 +325,6 @@ void ofApp::onMatrixEvent(ofxDatGuiMatrixEvent e)
     //cout << "onMatrixEvent " << e.target->getLabel() << " : " << e.target->getSelected().size() << endl;
 }
 
-void ofApp::toggleFullscreen()
-{
-    mFullscreen = !mFullscreen;
-    menuGui->getToggle("toggle fullscreen")->setChecked(mFullscreen);
-    refreshWindow();
-}
-
-void ofApp::refreshWindow()
-{
-    //TODO
-    ofSetFullscreen(mFullscreen);
-    if (!mFullscreen) {
-        ofSetWindowShape(1920, 1400);
-        ofSetWindowPosition((ofGetScreenWidth()/2)-(1920/2), 0);
-    }
-}
 
 void ofApp::makeModeGui(string mode)
 {
@@ -394,12 +332,14 @@ void ofApp::makeModeGui(string mode)
         // If there is an old ModeMenu delete it
         if(modeGui){
             delete modeGui;
+            modeGui = NULL;
         }
         //Instantiate the ModeMenu
         modeGui = new ofxDatGui( ofxDatGuiAnchor::TOP_RIGHT);
+        modeGui->setWidth(CAM_WIDTH/4);
         //Setup the different elements for each Mode
         if(mode == PLAY_ALONG){
-            vector<string> opts = {"Smoke on the Water (Intro)", "Song 2", "Song 3", "Song 4"};
+            vector<string> opts = {SongPlayer::SMOKE_ON_THE_WATER, "Song 2", "Song 3", "Song 4"};
             modeGui->addDropdown("Select Song", opts)->expand();
         }
         else if(mode == CHORD_WORKSHOP){
