@@ -23,7 +23,7 @@ SongPlayer::SongPlayer(GuitarOverlay* inputOverlay,string inputName):overlay(inp
         song.push_back(runningChord{GuitarOverlay::Chord{0, GuitarOverlay::MAYOR},4}); // C
         song.push_back(runningChord{GuitarOverlay::Chord{9, GuitarOverlay::MAYOR},4}); // A
     }
-    bpm=60.f;
+    bpm=100.f;
     setup();
 }
 
@@ -36,6 +36,9 @@ void SongPlayer::setup(){
     runningTime = 0.f;
     beatsPlayed = 0.f;
     currentChordIndex = -1;
+    overlay->resetState();
+    overlay->resetChords();
+    overlay->mode=1;
 }
 
 void SongPlayer::update(){
@@ -65,4 +68,8 @@ void SongPlayer::play(){
 
 void SongPlayer::pause(){
     running = false;
+}
+
+bool SongPlayer::isRunning(){
+    return running;
 }

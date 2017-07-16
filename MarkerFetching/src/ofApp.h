@@ -48,6 +48,9 @@ class ofApp : public ofBaseApp{
         const static int CAM_HEIGHT = 480;  //Developed with 480
         const static string PLAY_ALONG;
         const static string CHORD_WORKSHOP;
+        const static string PLAY;
+        const static string PAUSE;
+        const static string RESET_CHORD;
 
         ofVideoGrabber grabber;
         ofVideoPlayer player;
@@ -78,7 +81,6 @@ class ofApp : public ofBaseApp{
         noteRenderer renderer;
 
     private:
-        int state = 0;
 
 
 };

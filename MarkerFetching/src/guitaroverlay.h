@@ -24,7 +24,7 @@ public:
 
     void setup();
     void customDraw();
-    void drawChords(int state);
+    void drawChords();
     void update();
 
 
@@ -37,6 +37,7 @@ public:
     void setGuitar(Guitar &guitar);
     void setNote(int halfTone, int startFret, int fretInterval);
     void setChord(Chord displayedChord, int startFret=0);
+    void resetChords();
     void resetState();
 
 
@@ -44,9 +45,10 @@ public:
     //  The String will be written first like so:
     //  { [string,fret] | [string,fret] | [string,fret] }
     std::vector<std::vector<std::vector<int>>> scale = std::vector<std::vector<std::vector<int>>>(12);
-
     GuitarStringState state;
     Chord nextChord;
+    int mode;
+
 
 private:
 

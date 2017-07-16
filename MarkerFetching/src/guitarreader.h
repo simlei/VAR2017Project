@@ -23,6 +23,7 @@ class GuitarReader {
         uint64_t    requestLastTime;
         ofxSimpleSerial	serial;
         GuitarOverlay* overlay;
+        GuitarOverlay::chordType selectedType;
 
 		void		setup();
 		void		update();
@@ -30,6 +31,7 @@ class GuitarReader {
 		void		mousePressed(int x, int y, int button);
 		void		onNewMessage(string & message);
         void        resetState();
+        void        unlock();
 
         //Constant Fields
         const static int BOARD_WIDTH = 640/2;       // CAM_WIDTH/2
@@ -37,7 +39,10 @@ class GuitarReader {
         const static int STRINGS = 6;
         const static int FRETS = 8;
 
-	protected:
+    private:
+        bool locked;
+        int toneCandidate;
+        float bufferTime;
 		
 };	
 

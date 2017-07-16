@@ -22,6 +22,7 @@ GuitarOverlay::GuitarOverlay(Guitar& pGuitar):
     lastChord = Chord {0, EMPTY};
     currentChord = Chord {0, EMPTY};
     nextChord = Chord {0, EMPTY};
+    mode = 0;
 }
 
 int GuitarOverlay::getHalftoneFor(int stringIdx, int fretIdx) {
@@ -82,12 +83,6 @@ ofColor GuitarOverlay::getColorFor(int stringIdx, int fretIdx, int baseTone) {
 
 void GuitarOverlay::setup(){
     renderer.setup();
-    /*
-    box.set(0.2f);
-    for(int i=0; i<6; i++) {
-        box.setSideColor(i, ofColor::blue);
-    }
-    */
     launchTime = ofGetElapsedTimef();
 
 
@@ -115,9 +110,9 @@ void GuitarOverlay::customDraw(){
     }
 }
 
-void GuitarOverlay::drawChords(int state){
+void GuitarOverlay::drawChords(){
     ofSetColor(255,255,255);
-    if(state == 1){
+    if(mode == 1){
         mainChordFont.drawString(chordToString(currentChord),(640/2)-(mainChordFont.stringWidth(chordToString(currentChord))/2), 20 + mainChordFont.stringHeight(chordToString(currentChord))); //Should be connected to CAM_WIDTH
         if(&lastChord != NULL){
             sideChordFont.drawString(chordToString(lastChord),(640/2)-mainChordFont.getSize()-55, 10 + mainChordFont.getSize()); //Should be connected to CAM_WIDTH
@@ -126,7 +121,7 @@ void GuitarOverlay::drawChords(int state){
             sideChordFont.drawString(chordToString(nextChord),(640/2)+mainChordFont.getSize()+45, 10 + mainChordFont.getSize()); //Should be connected to CAM_WIDTH
         }
     }
-    else if(state == 2){
+    else if(mode == 2){
         mainChordFont.drawString(chordToString(currentChord),(640/2)-(mainChordFont.stringWidth(chordToString(currentChord))/2), 20 + 120 + mainChordFont.stringHeight(chordToString(currentChord))); //Should be connected to CAM_WIDTH
     }
 
@@ -207,6 +202,11 @@ void GuitarOverlay::setChord(Chord displayedChord, int startFret){
     }
 }
 
+void GuitarOverlay::resetChords(){
+    lastChord = Chord {0, EMPTY};
+    currentChord = Chord {0, EMPTY};
+    nextChord = Chord {0, EMPTY};
+}
 
 void GuitarOverlay::resetState(){
     for(int i=0; i<Guitar::MAX_STRING; i++) {
@@ -237,8 +237,10 @@ string GuitarOverlay::toneToString(int tone){
 
 string GuitarOverlay::chordToString(Chord chord){
     string resultString = "";
-    resultString.append(toneToString(chord.baseTone));
-    if(chord.type == chordType::MINOR) resultString.append("m");
-    if(chord.type == chordType::MAYOR7) resultString.append("7");
+    if(chord.type != EMPTY){
+        resultString.append(toneToString(chord.baseTone));
+        if(chord.type == chordType::MINOR) resultString.append("m");
+        if(chord.type == chordType::MAYOR7) resultString.append("7");
+    }
     return resultString;
 }

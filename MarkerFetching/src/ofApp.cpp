@@ -23,6 +23,9 @@ void drawMarker(float size, const ofColor & color){
 //--------------------------------------------------------------
 const string ofApp::PLAY_ALONG = "Play Along";
 const string ofApp::CHORD_WORKSHOP = "Chord Workshop";
+const string ofApp::PLAY = "Play";
+const string ofApp::PAUSE = "Pause";
+const string ofApp::RESET_CHORD = "Reset Chord";
 
 void ofApp::setup(){
 
@@ -169,8 +172,7 @@ void ofApp::draw(){
     //video->draw(0,0);
     //Draws the webcamfeed flipped on the y axis (mirrored)
     video->draw(CAM_WIDTH,0,-CAM_WIDTH, CAM_HEIGHT);
-    //std::cout << "Called with state: " << state << std::endl;
-    overlay->drawChords(state);
+    overlay->drawChords();
     if(reader)reader->draw();
     vector<aruco::Marker> markers = aruco.getMarkers();
 
@@ -199,7 +201,13 @@ void ofApp::draw(){
 	if(showBoardImage){
         board.draw(ofGetWidth()-320,0,320,320*float(board.getHeight())/float(board.getWidth()));
     }
-    //ofDrawBitmapString("Song Time: " + ofToString(songPlayer->runningTime),20,100);
+    if(songPlayer){
+        if(songPlayer->isRunning()){
+            //std::cout << "Heyho" << std::endl;
+            ofDrawBitmapString("Time: " + ofToString((int) songPlayer->runningTime),(CAM_WIDTH/2)-30,10);
+        }
+    }
+    //ofDrawBitmapString("markers detected: " + ofToString(aruco.getNumMarkers()),20,200);
 }
 
 //--------------------------------------------------------------
@@ -251,13 +259,21 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 //GUI
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e)
 {
-    //cout << "onButtonEvent: " << e.target->getLabel() << endl;
+    cout << "onButtonEvent: " << e.target->getLabel() << endl;
+    if(e.target->is(PLAY)){
+        songPlayer->play();
+    }
+    else if(e.target->is(PAUSE)){
+        songPlayer->pause();
+    }
+    else if(e.target->is(RESET_CHORD)){
+        reader->unlock();
+    }
 }
 
 void ofApp::onToggleEvent(ofxDatGuiToggleEvent e)
 {
-    //if (e.target->is("toggle fullscreen")) toggleFullscreen();
-    //cout << "onToggleEvent: " << e.target->getLabel() << " " << e.checked << endl;
+    cout << "onToggleEvent: " << e.target->getLabel() << " " << e.checked << endl;
 }
 
 void ofApp::onSliderEvent(ofxDatGuiSliderEvent e)
@@ -282,7 +298,6 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
 
     //-----Switch into "Play Along"-----
     if(e.target->getSelected()->is(PLAY_ALONG)){
-        state = 1;
         this->makeModeGui(PLAY_ALONG);
         if(reader) {delete reader; reader = NULL; overlay->resetState();}
         if(songPlayer){
@@ -295,7 +310,6 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
             modeGui->getDropdown("Select Song")->select(dropdownIndex);
         }
     }
-
         //Choices in the "PA"-Mode
         if(e.target->getSelected()->is(SongPlayer::SMOKE_ON_THE_WATER)){
             if(songPlayer) {delete songPlayer; songPlayer = NULL; overlay->resetState();}
@@ -304,13 +318,21 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
         }
 
     //-----Switch into "Chord Workshop"-----
-    if(e.target->getSelected()->is(CHORD_WORKSHOP)){
-        state = 2;
+    else if(e.target->getSelected()->is(CHORD_WORKSHOP)){
         this->makeModeGui(CHORD_WORKSHOP);
         songPlayer->pause();
-        overlay->resetState();
         if(!reader) reader = new GuitarReader(overlay);
     }
+        //Choices in the "CW"-Mode
+        if(e.target->getSelected()->is("Mayor")){
+            reader->selectedType = GuitarOverlay::chordType::MAYOR;
+        }
+        if(e.target->getSelected()->is("Minor")){
+            reader->selectedType = GuitarOverlay::chordType::MINOR;
+        }
+        if(e.target->getSelected()->is("Mayor7")){
+            reader->selectedType = GuitarOverlay::chordType::MAYOR7;
+        }
 }
 
 void ofApp::onColorPickerEvent(ofxDatGuiColorPickerEvent e)
@@ -325,7 +347,6 @@ void ofApp::onMatrixEvent(ofxDatGuiMatrixEvent e)
     //cout << "onMatrixEvent " << e.target->getLabel() << " : " << e.target->getSelected().size() << endl;
 }
 
-
 void ofApp::makeModeGui(string mode)
 {
 
@@ -335,16 +356,19 @@ void ofApp::makeModeGui(string mode)
             modeGui = NULL;
         }
         //Instantiate the ModeMenu
-        modeGui = new ofxDatGui( ofxDatGuiAnchor::TOP_RIGHT);
+        modeGui = new ofxDatGui(ofxDatGuiAnchor::TOP_RIGHT);
         modeGui->setWidth(CAM_WIDTH/4);
         //Setup the different elements for each Mode
         if(mode == PLAY_ALONG){
             vector<string> opts = {SongPlayer::SMOKE_ON_THE_WATER, "Song 2", "Song 3", "Song 4"};
             modeGui->addDropdown("Select Song", opts)->expand();
+            modeGui->addButton(PLAY);
+            modeGui->addButton(PAUSE);
         }
         else if(mode == CHORD_WORKSHOP){
             vector<string> opts = {"Minor", "Mayor", "Mayor7"};
             modeGui->addDropdown("Select Chord", opts)->expand();
+            modeGui->addButton(RESET_CHORD);
         }
 
         modeGui->addFooter()->setLabelWhenCollapsed("Mode Menu");

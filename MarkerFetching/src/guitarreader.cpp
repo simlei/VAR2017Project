@@ -4,20 +4,25 @@
 //--------------------------------------------------------------
 GuitarReader::GuitarReader(GuitarOverlay* inputOverlay):overlay(inputOverlay){
     overlay = inputOverlay;
+    lockedChord = false;
+    selectedType = GuitarOverlay::chordType::EMPTY;
+    requestLastTime = 0;
+    requestPeriod = 80; // this is fast
+    toneCandidate = -1;
     setup();
 }
 
 void GuitarReader::setup()
-{	 
-    lockedChord = false;
-    requestLastTime = 0;
-    requestPeriod = 10; // this is fast
+{
+    overlay->resetState();
+    overlay->resetChords();
+    overlay->mode = 2;
     resetState();
     serial.setup("/dev/ttyACM0", 9600);
 	serial.startContinuousRead();
     ofAddListener(serial.NEW_MESSAGE,this,&GuitarReader::onNewMessage);
     message = "";
-    overlay->setChord(GuitarOverlay::Chord{10, GuitarOverlay::chordType::MAYOR});
+    //overlay->setChord(GuitarOverlay::Chord{10, GuitarOverlay::chordType::MAYOR});
 }
 
 GuitarReader::~GuitarReader(){
@@ -71,6 +76,39 @@ void GuitarReader::update()
         //serial.sendRequest();
         requestLastTime = ofGetElapsedTimeMillis();
      }
+    if(!locked){
+        int tempInt;
+        bool doBreak = false;
+        for(int strings=0; strings<6; strings++) {
+            for(int frets=0; frets<8; frets++) {
+                if(doBreak)break;
+                if(electricFeedback[strings][frets]){
+                    std::cout << strings <<"|" << frets << std::endl;
+                    if((frets < 7) && electricFeedback[strings][frets]) //trying to get out the some uncertainty
+                        {tempInt = overlay->getHalftoneFor(strings,frets);}
+                    else
+                        {tempInt = overlay->getHalftoneFor(strings,frets);}
+                    doBreak = true;
+                }
+            }
+            if(doBreak)break;
+        }
+        if(tempInt == toneCandidate){
+            std::cout << "TempInt: " << tempInt << " | Candidate: " << toneCandidate << std::endl;
+            bufferTime += (float)ofGetLastFrameTime();
+        }else if(doBreak){
+            toneCandidate = tempInt;
+            bufferTime = 0;
+        }
+        if(bufferTime >= 1){
+            bufferTime = 0;
+            if(selectedType != GuitarOverlay::chordType::EMPTY){
+            overlay->setChord(GuitarOverlay::Chord{toneCandidate, selectedType});
+            locked = true;
+            }
+        }
+    }
+
 }
 
 //--------------------------------------------------------------
@@ -103,9 +141,16 @@ void GuitarReader::mousePressed(int x, int y, int button){
 }
 
 void GuitarReader::resetState(){
-    for(int i=0; i<6; i++) {
-        for(int k=0; k<8; k++) {
-            electricFeedback[i][k] = false;
+    for(int strings=0; strings<6; strings++) {
+        for(int frets=0; frets<8; frets++) {
+            electricFeedback[strings][frets] = false;
         }
     }
+}
+
+void GuitarReader::unlock(){
+    //could just call setup() but that seems overkill
+    overlay->resetState();
+    toneCandidate = -1;
+    locked = false;
 }

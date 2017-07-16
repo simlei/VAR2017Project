@@ -13,9 +13,9 @@ public:
 
     void setup();
     void update();
-
     void play();
     void pause();
+    bool isRunning();
 
     struct runningChord{
         GuitarOverlay::Chord chord;
