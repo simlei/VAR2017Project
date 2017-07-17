@@ -202,6 +202,10 @@ void GuitarOverlay::setChord(Chord displayedChord, int startFret){
     }
 }
 
+void GuitarOverlay::clearLastChord(){
+    lastChord = Chord {0, EMPTY};
+}
+
 void GuitarOverlay::resetChords(){
     lastChord = Chord {0, EMPTY};
     currentChord = Chord {0, EMPTY};

@@ -37,6 +37,7 @@ public:
     void setGuitar(Guitar &guitar);
     void setNote(int halfTone, int startFret, int fretInterval);
     void setChord(Chord displayedChord, int startFret=0);
+    void clearLastChord();
     void resetChords();
     void resetState();
 

@@ -29,7 +29,7 @@ public:
 
     //Constant Fields
     const static string SMOKE_ON_THE_WATER;
-    const static string SONG_2;
+    const static string SEVEN_NATION_ARMY;
     const static string SONG_3;
     const static string SONG_4;
 

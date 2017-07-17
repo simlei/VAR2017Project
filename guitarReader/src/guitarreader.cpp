@@ -13,8 +13,8 @@ void guitarreader::setup()
         }
     }
 
-    serial.setup("/dev/ttyACM0", 9600);
-	serial.startContinuousRead();
+    serial.setup("/dev/ttyACM0", 115200);
+    serial.startContinuousRead(false);
     ofAddListener(serial.NEW_MESSAGE,this,&guitarreader::onNewMessage);
 	
 	message = "";

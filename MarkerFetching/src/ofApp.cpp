@@ -304,7 +304,7 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
             songPlayer->play();
             int dropdownIndex = 0;
             if(songPlayer->songName == SongPlayer::SMOKE_ON_THE_WATER) dropdownIndex = 0;
-            if(songPlayer->songName == SongPlayer::SONG_2) dropdownIndex = 1;
+            if(songPlayer->songName == SongPlayer::SEVEN_NATION_ARMY) dropdownIndex = 1;
             if(songPlayer->songName == SongPlayer::SONG_3) dropdownIndex = 2;
             if(songPlayer->songName == SongPlayer::SONG_4) dropdownIndex = 3;
             modeGui->getDropdown("Select Song")->select(dropdownIndex);
@@ -314,6 +314,11 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
         if(e.target->getSelected()->is(SongPlayer::SMOKE_ON_THE_WATER)){
             if(songPlayer) {delete songPlayer; songPlayer = NULL; overlay->resetState();}
             songPlayer = new SongPlayer(overlay, SongPlayer::SMOKE_ON_THE_WATER);
+            songPlayer->play();
+        }
+        if(e.target->getSelected()->is(SongPlayer::SEVEN_NATION_ARMY)){
+            if(songPlayer) {delete songPlayer; songPlayer = NULL; overlay->resetState();}
+            songPlayer = new SongPlayer(overlay, SongPlayer::SEVEN_NATION_ARMY);
             songPlayer->play();
         }
 
@@ -360,7 +365,7 @@ void ofApp::makeModeGui(string mode)
         modeGui->setWidth(CAM_WIDTH/4);
         //Setup the different elements for each Mode
         if(mode == PLAY_ALONG){
-            vector<string> opts = {SongPlayer::SMOKE_ON_THE_WATER, "Song 2", "Song 3", "Song 4"};
+            vector<string> opts = {SongPlayer::SMOKE_ON_THE_WATER, SongPlayer::SEVEN_NATION_ARMY, "Song 3", "Song 4"};
             modeGui->addDropdown("Select Song", opts)->expand();
             modeGui->addButton(PLAY);
             modeGui->addButton(PAUSE);

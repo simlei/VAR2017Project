@@ -18,8 +18,8 @@ void GuitarReader::setup()
     overlay->resetChords();
     overlay->mode = 2;
     resetState();
-    serial.setup("/dev/ttyACM0", 9600);
-	serial.startContinuousRead();
+    serial.setup("/dev/ttyACM0", 115200);
+    serial.startContinuousRead(false);
     ofAddListener(serial.NEW_MESSAGE,this,&GuitarReader::onNewMessage);
     message = "";
     //overlay->setChord(GuitarOverlay::Chord{10, GuitarOverlay::chordType::MAYOR});
@@ -42,7 +42,7 @@ string trim(const string& str)
 
 void GuitarReader::onNewMessage(string & message)
 {
-    //cout << "onNewMessage, message: " << message << "\n";
+    cout << "onNewMessage, message: " << message << "\n";
 	
 	vector<string> input = ofSplitString(message, ",");
 	
@@ -71,12 +71,15 @@ void GuitarReader::onNewMessage(string & message)
 
 void GuitarReader::update()
 {
+    std::cout << "update\n";
     if(ofGetElapsedTimeMillis() - requestLastTime > requestPeriod)
      {
         //serial.sendRequest();
         requestLastTime = ofGetElapsedTimeMillis();
      }
     if(!locked){
+        std::cout << "locked loop\n";
+
         int tempInt;
         bool doBreak = false;
         for(int strings=0; strings<6; strings++) {
@@ -94,7 +97,7 @@ void GuitarReader::update()
             if(doBreak)break;
         }
         if(tempInt == toneCandidate){
-            std::cout << "TempInt: " << tempInt << " | Candidate: " << toneCandidate << std::endl;
+
             bufferTime += (float)ofGetLastFrameTime();
         }else if(doBreak){
             toneCandidate = tempInt;
