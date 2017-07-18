@@ -1,3 +1,9 @@
+# electronic guitar planning stage - 25. 06. 2017
+
+This document contains the planning of the electronically modified guitar. This document is the basis for an intermediary presentation.
+
+_18. 07. 2017:_ While building the guitar, a fundamental problem with the scanning setup for the fret states has emerged. Still, the approach discussed here remained to the be most viable to get the guitar state information with a microcontroller using the strings as switches, we winded up implementing it as discussed here. We were just not aware of a restriction of the general direction of the approach that is due to properties of the guitar and can't be overcome without completely overthinking the approach which was not viable at this stage of the project. In a nutshell: with multiple strings pressed on frets so that they make contact with other strings, we can not read the exact on/off state of all positions within a bounding box of those connected pressed fret positions. This is discussed in the [Tools, Problems, Solutions analysis](doc/analysis.md) page that is part of the final project submission that took place on the 17. 07. 2017.
+
 # Why we need a microcontroller on a guitar
 
 At the start of the project, I spent the better part of two weeks looking at existing papers and projects
