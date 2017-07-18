@@ -12,37 +12,17 @@ GuitarMeasure::GuitarMeasure(
     posHigherNeck = p3;
     posHigherBridge = p4;
 
-    std::vector<float> fretRatios(MAX_FRET);
-    fretRatios[0] = 0.000; //0th fret == bridge
-    fretRatios[1] = 0.056; //1st fret: ratio to full string length
-    fretRatios[2] = 0.109; //2nd fret: ratio to full string length
-    fretRatios[3] = 0.159; //...
-    fretRatios[4] = 0.206;
-    fretRatios[5] = 0.251;
-    fretRatios[6] = 0.293;
-    fretRatios[7] = 0.333;
-    fretRatios[8] = 0.370;
-    fretRatios[9] = 0.405;
-    fretRatios[10] = 0.439;
-    fretRatios[11] = 0.470;
-    fretRatios[12] = 0.500;
-    fretRatios[13] = 0.528;
-    fretRatios[14] = 0.555;
-    fretRatios[15] = 0.580;
-    fretRatios[16] = 0.603;
-    fretRatios[17] = 0.625;
-    fretRatios[18] = 0.646;
-    fretRatios[19] = 0.666;
-    fretRatios[20] = 0.685;
-    fretRatios[21] = 0.703;
-    fretRatios[22] = 0.719;
-    fretRatios[23] = 0.735;
-    fretRatios[24] = 0.750;
-    fretRatios[25] = 0.764;
-    fretRatios[26] = 0.777;
-    fretRatios[27] = 0.790;
-    fretRatios[28] = 0.802;
-    fretRatios[29] = 0.813;
+    fretRatios = {0.000f,    //0th fret == bridge
+                 0.056f,    //1st fret: ratio to full string length
+                 0.109f,    //2nd fret: ratio to full string length
+                 0.159f,    //...
+                 0.206f,
+                 0.251f ,0.293f ,0.333f ,0.370f,
+                 0.405f ,0.439f ,0.470f ,0.500f,
+                 0.528f ,0.555f ,0.580f ,0.603f,
+                 0.646f ,0.666f ,0.685f ,0.703f,
+                 0.719f ,0.735f ,0.750f ,0.764f,
+                 0.777f ,0.790f ,0.802f ,0.813f};
 
     ofVec3f incNeck = (posHigherNeck - posLowerNeck) * 0.2f; // 1/5 because 5 increments (6 strings)
     ofVec3f incBridge = (posHigherBridge - posLowerBridge) * 0.2f;

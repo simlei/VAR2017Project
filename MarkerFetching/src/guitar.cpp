@@ -2,10 +2,15 @@
 
 
 
-Guitar::Guitar(GuitarMeasure& m):
-    measures(m)
+Guitar::Guitar(
+        const ofVec3f &p1,
+        const ofVec3f &p2,
+        const ofVec3f &p3,
+        const ofVec3f &p4
+        )
 {
 
+    /*
     float ksL = 40;
     float ksW = 3;
 
@@ -22,6 +27,7 @@ Guitar::Guitar(GuitarMeasure& m):
     ksZ.lineTo(0, 0, ksL);
     ksZ.setStrokeColor(ofColor::blue);
     ksZ.setStrokeWidth(ksW);
+    */
 
 
 
@@ -49,5 +55,5 @@ void Guitar::auxDraw() {
     ksX.draw();
     ksY.draw();
     ksZ.draw();
-    measures.getBB().draw();
+    //measures.getBB().draw();
 }

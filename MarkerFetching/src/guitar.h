@@ -3,8 +3,7 @@
 
 #include "ofMain.h"
 #include "ofxAssimpModelLoader.h"
-#include "guitarmeasure.h"
-#include "Car.h"
+#include "noteRenderer.h"
 
 /*
  * This class is a prototype to be implemented
@@ -23,8 +22,27 @@
 class Guitar: public ofNode
 {
 public:
-    Guitar(GuitarMeasure &measures);
+    Guitar(
+            const ofVec3f &posLowerNeck,
+            const ofVec3f &posLowerBridge,
+            const ofVec3f &posHigherNeck,
+            const ofVec3f &posHigherBridge
+            );
     ~Guitar();
+
+
+
+    static const int MAX_STRING = 6;
+    static const int MAX_FRET = 30;
+
+    std::vector<float> fretRatios;
+
+    static void check_access(int stringIdx, int fretIdx) { // centralized checking if fret pos is valid
+        if(stringIdx < 0 || stringIdx >= MAX_STRING || fretIdx < 0 || fretIdx >= MAX_FRET) {
+            ofLogError("Guitar.cpp") << "string or fret index out of range!";
+            ofExit(1);
+        }
+    }
 
     virtual void setup(); // to do everything the constructor can't. Probably, set up OpenGL graphics directives.
     void drawdraw();
@@ -32,7 +50,7 @@ public:
     void auxDraw(); // draws a basic coordinate system and bounding box
 
     // contains everything about the geometry of the fretboard
-    GuitarMeasure measures;
+    // GuitarMeasure measures;  // not needed anymore
 
 private:
 
