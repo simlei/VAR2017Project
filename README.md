@@ -19,7 +19,7 @@ Starting June 25, when the tracking of the guitar seemed to work (most vital par
 
    * [Frontend / further improvement of ARuCo tracking / Teaching GUI and functionality  (Tim Unverzagt)](doc/frontend_tracking.md)
 
-   <img alt="Tim Unverzagt" src="doc/timunverzagt.jpg" />
+   <img alt="Tim Unverzagt" src="doc/timunverzagt.jpg" width="150px" />
 
    * [Electronics / Hardware and communication programming / Documentation (Simon Leischnig)](doc/electronics.md)
 
