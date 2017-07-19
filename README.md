@@ -53,7 +53,7 @@ Subprojects:
 - Recognition of the guitar fretboard without markers seemed possible at the time, but we decided very early in favor of using simple ARuCo Markers first due to them having the better cost/benefit trade-off by far for the start of the project
 - Tracking of the human hand was a big idea then, but now considered to be, if at all, only a thing for a very late stage of the project (e. g. when the electrically modified guitar is ditched)
 
-# May 8 - May 22
+## May 8 - May 22
 
  - Project pitch happened
  - Tim Unverzagt joined the project!
@@ -86,14 +86,23 @@ Subprojects:
 - [Plan and schematics for the electronic guitar](doc/electronics.md)
 
 
+### Guitar body tracking progress
 
+Furnished ARuCo markers of fitting size and installed them onto the guitar body
 
 <img src="doc/log_img/tracking11.jpg" width="300px" /> <img src="doc/log_img/tracking12.jpg" width="300px" /> <img src="doc/log_img/tracking31.jpg" width="300px" />
 
+### Electronics progress
+
+Wiring scheme
+
 <img src="doc/wiring.PNG" width="450px" />
+
+Makeshift electronics board with strings spanned over "frets" (meat sticks with copper tape) for simulating the real guitar.
 
 <img src="doc/log_img/sudoboard1.jpg" width="450px" />
 <img src="doc/log_img/sudoboard2.jpg" width="450px" />
+<img src="doc/log_img/sudoboard3.jpg" width="450px" />
 <img src="doc/log_img/sudoboard4.jpg" width="450px" />
 
 
@@ -106,10 +115,17 @@ Subprojects:
   - usb client application on the PC
 - A bit of frontend work
 
-<img src="doc/log_img/guitar_010.jpg" width="300px" /> <img src="doc/log_img/guitar_020.jpg" width="300px" /> <img src="doc/log_img/guitar_021.jpg" width="300px" />
+![](doc/log_img/guitar_010.jpg)
+![](doc/log_img/guitar_011.jpg)
 
+![](doc/log_img/guitar_020.jpg)
+![](doc/log_img/guitar_021.jpg)
+![](doc/log_img/guitar_022.jpg)
+![](doc/log_img/guitar_023.jpg)
 
-<img src="doc/log_img/guitar_031.jpg" width="450px" /> <img src="doc/log_img/guitar_033.jpg" width="450px" />
+![](doc/log_img/guitar_031.jpg)
+![](doc/log_img/guitar_033.jpg)
+![](doc/log_img/guitar_040.jpg)
 
 ## July 7 - July 17
 
@@ -119,4 +135,4 @@ Subprojects:
  - Drastically reduced communication lag with the USB guitar
  - Final presentation happened on the 17th
 
-<img src="doc/log_img/xChordWorkshop.png" width="300px" /> <img src="doc/log_img/xChordWorkshop2.png" width="300px" /> <img src="doc/log_img/xPlayAlong.png" width="300px" /> <img src="doc/log_img/xPlayAlong2.png" width="300px" /> <img src="doc/log_img/xPlayAlongCollapsed.png" width="300px" /> <img src="doc/log_img/xSelectMode.png" width="300px" /> <img src="doc/log_img/xSmoke2.png" width="300px" />
+<img src="doc/log_img/xChordWorkshop.png" width="450px" /> <img src="doc/log_img/xChordWorkshop2.png" width="450px" /> <img src="doc/log_img/xPlayAlong.png" width="450px" /> <img src="doc/log_img/xPlayAlong2.png" width="450px" /> <img src="doc/log_img/xPlayAlongCollapsed.png" width="450px" /> <img src="doc/log_img/xSelectMode.png" width="450px" /> <img src="doc/log_img/xSmoke2.png" width="450px" />
