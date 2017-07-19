@@ -86,15 +86,24 @@ Subprojects:
 - [Plan and schematics for the electronic guitar](doc/electronics.md)
 
 
-<img src="doc/wiring.PNG" width="450px" />
+
 
 <img src="doc/log_img/tracking11.jpg" width="300px" /> <img src="doc/log_img/tracking12.jpg" width="300px" /> <img src="doc/log_img/tracking31.jpg" width="300px" />
+
+<img src="doc/wiring.PNG" width="450px" />
+
+<img src="doc/log_img/sudoboard1.jpg" width="450px" />
+<img src="doc/log_img/sudoboard2.jpg" width="450px" />
+<img src="doc/log_img/sudoboard4.jpg" width="450px" />
+
 
 
 ## June 25 - July 7
 
 - Finished the electronic guitar!
-  - arduino code and
+  - arduino code
+  - wiring, fixation on the guitar
+  - usb client application on the PC
 - A bit of frontend work
 
 <img src="doc/log_img/guitar_010.jpg" width="300px" /> <img src="doc/log_img/guitar_020.jpg" width="300px" /> <img src="doc/log_img/guitar_021.jpg" width="300px" />
