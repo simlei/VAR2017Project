@@ -1,8 +1,8 @@
-# electronic guitar planning stage - 25. 06. 2017
+# Electronic/USB guitar
 
 This document contains the planning of the electronically modified guitar. This document is the basis for an intermediary presentation.
 
-_18. 07. 2017:_ While building the guitar, a fundamental problem with the scanning setup for the fret states has emerged. Still, the approach discussed here remained to the be most viable to get the guitar state information with a microcontroller using the strings as switches, we winded up implementing it as discussed here. We were just not aware of a restriction of the general direction of the approach that is due to properties of the guitar and can't be overcome without completely overthinking the approach which was not viable at this stage of the project. In a nutshell: with multiple strings pressed on frets so that they make contact with other strings, we can not read the exact on/off state of all positions within a bounding box of those connected pressed fret positions. This is discussed in the [Tools, Problems, Solutions analysis](doc/analysis.md) page that is part of the final project submission that took place on the 17. 07. 2017.
+_18. 07. 2017:_ While building the guitar, a fundamental problem with the scanning setup for the fret states has emerged. Still, the approach discussed here remained to the be most viable to get the guitar state information with a microcontroller using the strings as switches, we winded up implementing it as discussed here. We were just not aware of a restriction of the general direction of the approach that is due to properties of the guitar and can't be overcome without completely overthinking the approach which was not viable at this stage of the project. In a nutshell: with multiple strings pressed on frets so that they make contact with other strings, we can not read the exact on/off state of all positions within a bounding box of those connected pressed fret positions. This is discussed in the [Tools, Problems, Solutions analysis](analysis.md#reading-out-the-electronic-guitar-state) page that is part of the final project submission that took place on the 17. 07. 2017.
 
 # Why we need a microcontroller on a guitar
 
@@ -18,15 +18,11 @@ For being able to produce something that already works in the time frame of the 
 
 # Building the electronically augmented guitar
 
-We want to modify a usual guitar so that the attached computer
-(and thus, the frontend application) knows instantly which string is pressed down at
-which fret.
+We want to modify a usual guitar so that the attached computer (and thus, the frontend application) knows instantly which string is pressed down at which fret.
 
-How to do it? The guitar strings on western guitars and on electric guitars are usually
-metallic and conduct electricity. That enables us to think about a guitar string
-touching a fret as a switch. If a guitar string is pressed down, a circuit is closed. A microcontroller can read the switch configuration and transfer it to the application. [OpenChord](http://www.laboratoryspokane.com/openchord/the-openchord-v1-guitar/)
-already built such a guitar and sold it. The project is dead now, but the author
-published instructions on how to DIY. The OpenChord guitar featured a metallic guitar pick which supplied voltage to make the string switches work; we instead want to do it without such a tethered pick. We will lose the information on when the player strikes the guitar strings, but we are optimistic that at a later stage of the project this information can be automatically recovered from listening to the guitar audio, using the information which strings are currently fingered at which frets. This requires a fair amount of research into digital signal processing, but for now we will be content with knowing where thr strings are pressed without knowing the actual note onset times.
+How to do it? The guitar strings on western guitars and on electric guitars are usually metallic and conduct electricity. That enables us to think about a guitar string touching a fret as a switch. If a guitar string is pressed down, a circuit is closed. A microcontroller can read the switch configuration and transfer it to the application. [OpenChord](http://www.laboratoryspokane.com/openchord/the-openchord-v1-guitar/) already built such a guitar and sold it. The project is dead now, but the author published instructions on how to DIY.
+
+The OpenChord guitar featured a metallic guitar pick which supplied voltage to make the string switches work; we instead want to do it without such a tethered pick. We will lose the information on when the player strikes the guitar strings, but we are optimistic that at a later stage of the project this information can be automatically recovered from listening to the guitar audio, using the information which strings are currently fingered at which frets. This requires a fair amount of research into digital signal processing, but for now we will be content with knowing where the strings are pressed without knowing the actual note onset times.
 
 Since we initially had only very limited knowledge with the design of digital circuits and microcontrollers, we decided to keep it as simple as possible. Arduino is a platform that is well documented, has a huge community and is supposed to be very beginner-friendly. Before going for the setup with a real guitar, we can try out the circuit on a breadbord, simulating a fret contact by just pressing a switch or bringing two wires into contact.
 
