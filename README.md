@@ -41,7 +41,7 @@ Subprojects:
 
 # Discussion of the tools, problems and results.
 
-[see here](doc/electronics.md)
+[see here](doc/analysis.md)
 
 # Project log with images of the progress
 
