@@ -1,18 +1,10 @@
-Virtual and Augmented Reality - Project 2017
-
-<<<<<<< HEAD:project_pitch.md
-[Presentation in MS Sway can be found here](pres.md)
-=======
 # This is the archived project pitch from end of April 2017
 
 Much of the initial thoughts on the project may already be obsolete. For example, we abandoned the idea of visual hand tracking for now.
 
 # Presentation
 
-Since the big project presentations are tomorrow, [here is mine :)](https://sway.com/LJc2ziR6jpuGUxak?ref=Link)
-
-See you all :)
->>>>>>> master:doc/project_pitch.md
+[Presentation in MS Sway can be found here](pres.md)
 
 # Motivation and Project Idea
 
@@ -52,8 +44,6 @@ Here is how I would sketch it as a desktop app:
 To me, the UI has to be as non-intrusive and minimal as possible. I think about it like a magic mirror. A practical idea for controlling the app is recording **music macros** as trigger for e. g. navigational commands.
 
 An immersive mode with a VR headset could be appealing in certain use cases if the user is used to playing without direct visual feedback already. This would be something different from the "augmented mirror" mode since it would have just the widgets, not the augmented guitar/ I would not force this, but for a play-along-a-song-mode it makes sense to imagine widgets and layers inside of a 360 degree video from a concert stage (e.g. with synchronized lyrics and chord timings floating somewhere).
-
-![enter image description here](assets/immersive.png)
 
 A promising idea to provide information on which strings of the guitar are pressed where by which finger is to **track the "left hand"** (or the one at the frets) of the player visually. If this is achieved, we will probably have used a kinematic model of a human hand which can also be used to render a phantom hand that
 
